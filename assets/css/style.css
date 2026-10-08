@@ -933,6 +933,89 @@ span.zh, span.en { display: inline; }
 .fig-note { margin-top: 12px; font-size: 12.3px; color: var(--ink-3); line-height: 1.75; }
 .fig-note b { color: var(--ink-2); }
 
+/* Rendered figures: PNGs produced by tools/make_figures.py from the repo results.
+   Same caption grammar as the hand-drawn figures above, so the two read as one set. */
+.media {
+  margin-top: 24px;
+  padding: 16px 18px 14px;
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  max-width: 780px;
+}
+.media figcaption {
+  font-size: 12.6px;
+  color: var(--ink-3);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.media figcaption b {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-right: 6px;
+}
+.media-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: border-color var(--t), box-shadow var(--t);
+}
+.media-btn:hover { border-color: var(--acc-tint); box-shadow: var(--shadow-1); }
+.media-btn:focus-visible { outline: 2px solid var(--deep-sky); outline-offset: 2px; }
+.media-btn img { width: 100%; height: auto; }
+.media-note { margin-top: 12px; font-size: 12.3px; color: var(--ink-3); line-height: 1.75; }
+.media-note b { color: var(--ink-2); }
+
+/* Full-size viewer */
+.viewer {
+  width: min(96vw, 1400px);
+  max-width: none;
+  max-height: 94vh;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+}
+.viewer::backdrop { background: rgba(18, 24, 29, .62); backdrop-filter: blur(2px); }
+.viewer-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px 11px 16px;
+  border-bottom: 1px solid var(--rule-2);
+}
+.viewer-cap { font-size: 12.6px; color: var(--ink-3); line-height: 1.6; }
+.viewer-x {
+  flex: 0 0 auto;
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  font-size: 13px;
+  transition: color var(--t), border-color var(--t);
+}
+.viewer-x:hover { color: var(--ink); border-color: var(--ink-3); }
+.viewer-img {
+  display: block;
+  width: 100%;
+  max-height: calc(94vh - 56px);
+  object-fit: contain;
+  background: var(--paper);
+}
+
 /* Footnote-ish line under the entries */
 .note {
   margin-top: 32px;

@@ -216,6 +216,61 @@
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   }, 2500);
 
+  /* ------------------------------------------------------- figure viewer - */
+  // Any [data-zoom] button opens its source image in the <dialog>. Native
+  // dialog gives focus handling and Esc for free; without JS the inline
+  // figure is simply a static image.
+  var viewer = document.getElementById('viewer');
+  var viewerImg = document.getElementById('viewerImg');
+  var viewerCap = document.getElementById('viewerCap');
+
+  if (viewer && viewerImg && typeof viewer.showModal === 'function') {
+    var viewerCaption = '';
+
+    // The caption lives in the page as a zh/en pair, so read back only the
+    // language currently on screen instead of concatenating both.
+    function visibleText(el) {
+      var lang = root.getAttribute('data-lang') === 'en' ? 'en' : 'zh';
+      var other = lang === 'en' ? 'zh' : 'en';
+      var clone = el.cloneNode(true);
+      Array.prototype.forEach.call(clone.querySelectorAll('.' + other), function (n) {
+        n.parentNode.removeChild(n);
+      });
+      return clone.textContent.replace(/\s+/g, ' ').trim();
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-zoom]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var fig = btn.closest('figure');
+        var cap = fig ? fig.querySelector('figcaption') : null;
+        viewerCaption = cap ? visibleText(cap) : '';
+        viewerImg.src = btn.getAttribute('data-zoom');
+        var inline = btn.querySelector('img');
+        viewerImg.alt = inline ? inline.alt : '';
+        if (viewerCap) viewerCap.textContent = viewerCaption;
+        viewer.showModal();
+      });
+    });
+
+    // Follow a language switch while the viewer is open.
+    var langObserver = new MutationObserver(function () {
+      if (viewer.open && viewerCap && viewerCaption) {
+        var fig = document.querySelector('[data-zoom]');
+        var cap = fig ? fig.closest('figure').querySelector('figcaption') : null;
+        if (cap) viewerCap.textContent = visibleText(cap);
+      }
+    });
+    langObserver.observe(root, { attributes: true, attributeFilter: ['data-lang'] });
+
+    // Click the backdrop (outside the image and the bar) to dismiss.
+    viewer.addEventListener('click', function (e) {
+      if (e.target === viewer) viewer.close();
+    });
+    viewer.addEventListener('close', function () {
+      viewerImg.removeAttribute('src');   // release the decoded bitmap
+    });
+  }
+
   /* ------------------------------------------------------------ year ---- */
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());

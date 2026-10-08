@@ -524,6 +524,15 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
+<!-- Figure viewer: opens any [data-zoom] button. Falls back to no-op without JS. -->
+<dialog class="viewer" id="viewer" aria-label="数据图查看器 / Figure viewer">
+  <form method="dialog" class="viewer-bar">
+    <p class="viewer-cap" id="viewerCap"></p>
+    <button class="viewer-x" type="submit" aria-label="关闭 / Close">✕</button>
+  </form>
+  <img class="viewer-img" id="viewerImg" alt="">
+</dialog>
+
 <script src="../assets/js/main.js"></script>
 </body>
 </html>

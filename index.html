@@ -349,6 +349,40 @@
             </p>
           </figure>
 
+          <figure class="media">
+            <figcaption>
+              <b><span class="zh">图 2</span><span class="en">Fig. 2</span></b>
+              <span class="zh">测试集 ROC：阴影为对 2,046 家测试企业做 1,000 次 Bootstrap 得到的 95% 区间</span>
+              <span class="en">Test-set ROC; the band is a 95% bootstrap interval over 1,000 resamples of the 2,046 test firms</span>
+            </figcaption>
+            <button class="media-btn" type="button" data-zoom="assets/figures/fig-roc.png"
+                    aria-label="放大查看：测试集 ROC 曲线 / Enlarge: test-set ROC curve">
+              <img src="assets/figures/fig-roc.png" width="1344" height="1052" loading="lazy" decoding="async"
+                   alt="测试集 ROC 曲线，AUC 0.9380，附 95% Bootstrap 置信带；测试集 2,046 家中破产 76 家。">
+            </button>
+            <p class="media-note">
+              <span class="zh">AUC 由仓库落盘的测试概率重新计算，与论文报告一致；破产样本仅 76 家，置信带在假阳性率 0.1–0.3 区间明显变宽——这是测试集规模的限制，不是模型的缺陷。</span>
+              <span class="en">The AUC was recomputed from the probabilities committed to the repo and matches the reported figure. With only 76 bankrupt cases the band widens markedly between false-positive rates 0.1 and 0.3 — a limit of the test-set size, not of the model.</span>
+            </p>
+          </figure>
+
+          <figure class="media">
+            <figcaption>
+              <b><span class="zh">图 3</span><span class="en">Fig. 3</span></b>
+              <span class="zh">SCAD 保留下来的 16 个特征及其系数：15 个是交互项，13 个涉及杠杆模块</span>
+              <span class="en">The 16 features SCAD kept, with their coefficients: 15 are interactions and 13 involve the leverage block</span>
+            </figcaption>
+            <button class="media-btn" type="button" data-zoom="assets/figures/fig-scad.png"
+                    aria-label="放大查看：SCAD 选出的 16 个特征 / Enlarge: the 16 SCAD-selected features">
+              <img src="assets/figures/fig-scad.png" width="2300" height="1020" loading="lazy" decoding="async"
+                   alt="SCAD 选择的 16 个非零特征棒棒糖图，横轴为对称对数刻度，最大正系数 F01 约 65.6，最小负系数 F02 约 -25.8。">
+            </button>
+            <p class="media-note">
+              <span class="zh">这 16 个特征每一项都能回溯到筛选与惩罚回归的中间结果；系数方向给的是判别方向，不是因果效应。</span>
+              <span class="en">Each of the 16 traces back to intermediate screening and penalized-regression output. The signs give a direction of discrimination, not a causal effect.</span>
+            </p>
+          </figure>
+
           <div class="entry-foot">
             <div class="tags"><span>R</span><span>Rcpp</span><span>Parallel</span><span>SCAD</span><span>Spline tensor</span><span>Survival</span></div>
             <a class="link-out" href="https://github.com/Yei1y/Company-Bankruptcy-Prediction" target="_blank" rel="noopener">
@@ -430,6 +464,23 @@
             <p class="fig-note">
               <span class="zh">人群划分以购入价格为核心指标、共 9 个聚类变量加权而成；SEM 的 RMSEA = 0.030。企业委托项目，底稿涉密，此处仅展示可公开的汇总口径。</span>
               <span class="en">Segments come from a weighted K-Means over nine variables centred on purchase price; the SEM reports RMSEA = 0.030. Client work with confidential source materials — only publishable aggregates are shown.</span>
+            </p>
+          </figure>
+
+          <figure class="media">
+            <figcaption>
+              <b><span class="zh">图 5</span><span class="en">Fig. 5</span></b>
+              <span class="zh">三类人群结构与模型质量：右图为 SEM 解释方差与量表信度 α</span>
+              <span class="en">Segment structure and model quality; the right panel gives variance explained by the SEM and the scale's reliability α</span>
+            </figcaption>
+            <button class="media-btn" type="button" data-zoom="assets/figures/fig-segments.png"
+                    aria-label="放大查看：市场调查的三类人群与模型质量 / Enlarge: segments and model quality">
+              <img src="assets/figures/fig-segments.png" width="2043" height="721" loading="lazy" decoding="async"
+                   alt="左侧为加权 K-Means 三类人群占比 13.19%、56.35%、30.46%；右侧为 SEM 解释方差 68.7% 与量表信度 α = 0.983。">
+            </button>
+            <p class="media-note">
+              <span class="zh">样本为广深 2 城 21 街道的 747 份有效问卷；企业委托项目底稿涉密，此处只公开汇总口径。</span>
+              <span class="en">Based on 747 valid questionnaires across 21 subdistricts in two cities. Client work with confidential source materials, so only publishable aggregates appear here.</span>
             </p>
           </figure>
 
@@ -632,6 +683,23 @@
             </p>
           </figure>
 
+          <figure class="media">
+            <figcaption>
+              <b><span class="zh">图 7</span><span class="en">Fig. 7</span></b>
+              <span class="zh">六种设定下的平均因果效应：换 nuisance 估计量与交叉拟合折数，置信区间始终覆盖 0</span>
+              <span class="en">The ATE under six specifications: swap the nuisance estimator or the number of cross-fitting folds and the interval still covers zero</span>
+            </figcaption>
+            <button class="media-btn" type="button" data-zoom="assets/figures/fig-dml-forest.png"
+                    aria-label="放大查看：六种设定下的平均因果效应 / Enlarge: ATE across six specifications">
+              <img src="assets/figures/fig-dml-forest.png" width="2459" height="923" loading="lazy" decoding="async"
+                   alt="森林图：基线、LASSO、XGBoost、K=2、K=10 五种设定的置信区间均覆盖 0；严格 D 设定估计 +5.57%，p = 0.030。">
+            </button>
+            <p class="media-note">
+              <span class="zh">前五行结论稳定在零附近（ATE ∈ [0.0004, 0.0059]）。末行「严格 D」把分母换成仅全样本，结论变为 +5.57%——这是本项目最该被追问的地方，也是我把它写进图里的原因：<b>结论对分母口径敏感，而口径来自数据生成方式的假设</b>。</span>
+              <span class="en">The first five specifications sit near zero (ATE ∈ [0.0004, 0.0059]). The last row, “strict D”, restricts the denominator to the full sample and turns the result into +5.57% — the first thing I would want challenged, and the reason it is in the figure: <b>the conclusion is sensitive to the denominator definition, and that definition rests on assumptions about how the data were generated</b>.</span>
+            </p>
+          </figure>
+
           <div class="entry-foot">
             <div class="tags"><span>Python</span><span>EconML</span><span>Causal forest</span><span>Cross-fitting</span><span>Placebo test</span></div>
             <a class="link-out" href="https://github.com/Yei1y/ai-adoption-productivity-dml" target="_blank" rel="noopener">
@@ -721,6 +789,23 @@
             <p class="fig-note">
               <span class="zh">前两段转化率都在 67%–74%，到「详情页 → 支付页」骤降到 <b>12.63%</b>，流失量约为第二大流失点的 10 倍——这是 24 条 SQL 查询里唯一值得优先动的环节。转化口径为「到达确认页」，不等于支付成功；卡方检验经 BH 校正后 8 个维度均显著，但只有活跃度具备实质关联。</span>
               <span class="en">The first two steps convert at 67%–74%, then detail → payment collapses to <b>12.63%</b>, losing roughly ten times the next-worst step — the one place among the 24 SQL queries worth fixing first. Conversion here means reaching the confirmation page, not a completed payment; after BH correction all eight dimensions were significant, but only engagement carried real association.</span>
+            </p>
+          </figure>
+
+          <figure class="media">
+            <figcaption>
+              <b><span class="zh">图 8</span><span class="en">Fig. 8</span></b>
+              <span class="zh">同一份取数结果的完整版：左为各环节到达人数（对数刻度），右为逐段转化率</span>
+              <span class="en">The same query output, complete: sessions reaching each step on a log scale, and the step-over-step conversion rate</span>
+            </figcaption>
+            <button class="media-btn" type="button" data-zoom="assets/figures/fig-funnel.png"
+                    aria-label="放大查看：电商漏斗与逐段转化率 / Enlarge: funnel and step conversion">
+              <img src="assets/figures/fig-funnel.png" width="1790" height="785" loading="lazy" decoding="async"
+                   alt="左图：首页 97,274、列表页 71,684、详情页 47,922、支付页 6,052、确认页 1,684（对数刻度）；右图：逐段转化率 73.69%、66.85%、12.63%、27.83%。">
+            </button>
+            <p class="media-note">
+              <span class="zh">会话数取自 24 条 SQL 查询落盘的结果。左图用对数刻度，否则支付页与确认页会被压成一条线；右图是同一组数的另一种读法，也是我在报告里用来定位瓶颈的那张图。</span>
+              <span class="en">Session counts come from the persisted output of the 24 SQL queries. The left panel is log-scaled, otherwise the payment and confirmation steps collapse into a line; the right panel reads the same numbers the other way and is the view I used to locate the bottleneck.</span>
             </p>
           </figure>
 
@@ -903,6 +988,15 @@
 </footer>
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<!-- Figure viewer: opens any [data-zoom] button. Falls back to no-op without JS. -->
+<dialog class="viewer" id="viewer" aria-label="数据图查看器 / Figure viewer">
+  <form method="dialog" class="viewer-bar">
+    <p class="viewer-cap" id="viewerCap"></p>
+    <button class="viewer-x" type="submit" aria-label="关闭 / Close">✕</button>
+  </form>
+  <img class="viewer-img" id="viewerImg" alt="">
+</dialog>
 
 <script src="assets/js/main.js"></script>
 </body>

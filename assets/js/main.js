@@ -1,90 +1,222 @@
-/* ============================================
-   Yeily | Personal Website - Main Script
-   ============================================ */
+/* ============================================================================
+   Weifeng Ye · yei1y.github.io
+   main.js — theme, language, navigation, reveal animations, reading progress
+   No dependencies. Everything degrades gracefully if JS is unavailable.
+   ========================================================================= */
 
 (function () {
   'use strict';
 
-  /* --- Theme Toggle --- */
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeIcon = themeToggle?.querySelector('span');
+  var root = document.documentElement;
+  var STORE_THEME = 'wy-theme';
+  var STORE_LANG = 'wy-lang';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function getPreferredTheme() {
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  /* ---------------------------------------------------------- theme ---- */
+  var themeBtn = document.getElementById('themeBtn');
+  var themeIcon = document.getElementById('themeIcon');
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function paintThemeIcon(theme) {
+    if (themeIcon) themeIcon.textContent = theme === 'dark' ? '☀' : '☾';
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'dark' ? '#12181D' : '#FBFAF6');
   }
 
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    paintThemeIcon(theme);
+  }
+
+  function storeTheme(theme) {
+    try { localStorage.setItem(STORE_THEME, theme); } catch (e) {}
+  }
+
+  // A colour-scheme change repaints the whole page; cross-fade it so the switch
+  // does not read as a flash. Browsers without the API simply swap instantly.
   function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    if (themeIcon) {
-      themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    if (!reduced && document.startViewTransition) {
+      var vt = document.startViewTransition(function () { applyTheme(theme); });
+      if (vt && vt.finished && vt.finished.catch) vt.finished.catch(function () {});
+    } else {
+      applyTheme(theme);
+    }
+    storeTheme(theme);
+  }
+
+  paintThemeIcon(root.getAttribute('data-theme') || 'light');
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+  }
+
+  // Follow the system only while the visitor has not chosen a theme themselves.
+  var scheme = window.matchMedia('(prefers-color-scheme: dark)');
+  var onSchemeChange = function (e) {
+    var stored = null;
+    try { stored = localStorage.getItem(STORE_THEME); } catch (err) {}
+    if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+  };
+  if (scheme.addEventListener) scheme.addEventListener('change', onSchemeChange);
+
+  /* ------------------------------------------------------- language ---- */
+  var langBtn = document.getElementById('langBtn');
+
+  function paintLangBtn(lang) {
+    if (!langBtn) return;
+    var next = lang === 'en' ? '中文' : 'English';
+    langBtn.setAttribute('aria-label', '切换到' + (lang === 'en' ? '中文' : 'English') + ' / Switch to ' + next);
+    langBtn.setAttribute('title', next);
+  }
+
+  function setLang(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'en' ? 'en' : 'zh-CN');
+    paintLangBtn(lang);
+    try { localStorage.setItem(STORE_LANG, lang); } catch (e) {}
+  }
+
+  paintLangBtn(root.getAttribute('data-lang') === 'en' ? 'en' : 'zh');
+
+  if (langBtn) {
+    langBtn.addEventListener('click', function () {
+      setLang(root.getAttribute('data-lang') === 'en' ? 'zh' : 'en');
+    });
+  }
+
+  /* ------------------------------------------------------ mobile nav ---- */
+  var burger = document.getElementById('burger');
+  var navLinks = document.getElementById('navLinks');
+
+  if (burger && navLinks) {
+    burger.addEventListener('click', function () {
+      var open = navLinks.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    navLinks.addEventListener('click', function (e) {
+      if (e.target.closest('a')) {
+        navLinks.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navLinks.classList.contains('is-open')) {
+        navLinks.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  /* ----------------------------------------- nav shadow + progress bar -- */
+  var nav = document.getElementById('nav');
+  var progress = document.getElementById('progress');
+  var toTop = document.getElementById('toTop');
+
+  function onScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var ratio = docH > 0 ? Math.min(1, y / docH) : 0;
+
+    if (progress) progress.style.width = (ratio * 100) + '%';
+    if (nav) nav.classList.toggle('is-stuck', y > 8);
+    if (toTop) toTop.classList.toggle('is-on', y > 760);
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      onScroll();
+      ticking = false;
+    });
+  }, { passive: true });
+
+  onScroll();
+
+  if (toTop) {
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* --------------------------------------------------- scroll spy ------ */
+  // Only anchor links that point at a section on *this* page take part.
+  var spyLinks = Array.prototype.filter.call(
+    document.querySelectorAll('#navLinks a'),
+    function (a) {
+      var href = a.getAttribute('href') || '';
+      return href.charAt(0) === '#' && href.length > 1;
+    }
+  );
+
+  if (spyLinks.length) {
+    var targets = spyLinks
+      .map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+      .filter(Boolean);
+
+    if (targets.length) {
+      var spy = function () {
+        var y = (window.scrollY || window.pageYOffset) + 140;
+        var current = null;
+        targets.forEach(function (sec) {
+          if (sec.offsetTop <= y) current = sec.id;
+        });
+        spyLinks.forEach(function (a) {
+          a.classList.toggle('is-active', a.getAttribute('href') === '#' + current);
+        });
+      };
+      window.addEventListener('scroll', spy, { passive: true });
+      spy();
     }
   }
 
-  setTheme(getPreferredTheme());
+  /* --------------------------------------------------- reveal on scroll - */
+  // Deliberately geometry-based rather than IntersectionObserver: the page must
+  // never be able to leave content invisible if an observer callback is missed.
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 
-  themeToggle?.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-
-  /* --- Scroll Animation (Intersection Observer) --- */
-  const animateElements = document.querySelectorAll('.fade-in');
-
-  if (animateElements.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    animateElements.forEach((el) => observer.observe(el));
-  }
-
-  /* --- Active Nav Link on Scroll --- */
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  function updateActiveLink() {
-    let current = '';
-    sections.forEach((section) => {
-      const top = section.offsetTop - 100;
-      if (window.scrollY >= top) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach((link) => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
+  function revealCheck() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var queued = 0;
+    reveals.forEach(function (el) {
+      if (el.classList.contains('is-in')) return;
+      // Reveal once the element's top edge is near the fold — or if it is
+      // already above it (deep link, restored scroll position, printing).
+      if (el.getBoundingClientRect().top >= vh - 60) return;
+      var delay = reduced ? 0 : Math.min(queued * 55, 220);
+      queued++;
+      window.setTimeout(function () { el.classList.add('is-in'); }, delay);
     });
   }
 
-  if (sections.length > 0 && navLinks.length > 0) {
-    window.addEventListener('scroll', updateActiveLink);
-    updateActiveLink();
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
   }
 
-  /* --- Smooth Scroll for Nav Links --- */
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href.startsWith('#')) {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    });
-  });
+  // Safety net: covers browsers without IO, and any missed observer callback.
+  window.addEventListener('scroll', revealCheck, { passive: true });
+  window.addEventListener('resize', revealCheck, { passive: true });
+  window.addEventListener('load', revealCheck);
+  revealCheck();
+
+  // Last-resort guarantee: nothing on this page may stay invisible because an
+  // animation did not fire. After a few seconds every block is simply shown.
+  window.setTimeout(function () {
+    reveals.forEach(function (el) { el.classList.add('is-in'); });
+  }, 2500);
+
+  /* ------------------------------------------------------------ year ---- */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 })();

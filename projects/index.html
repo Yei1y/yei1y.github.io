@@ -1,105 +1,529 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="zh-CN" data-theme="light" data-lang="zh" data-accent="mint">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Yeily — Project portfolio.">
-  <title>Projects | Yeily</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📊</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="叶伟丰的项目全集：8 个统计建模、因果推断、市场调查与用户行为分析项目的三维评分表、排序逻辑与按岗位裁剪建议。">
+<meta name="author" content="Weifeng Ye 叶伟丰">
+<meta name="theme-color" content="#FBFAF6">
+<title>项目全集 · Selected Work | 叶伟丰 Weifeng Ye</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='26' fill='%23DCF4EA'/><text x='50' y='68' font-size='46' font-family='Georgia,serif' font-weight='bold' fill='%231F7A66' text-anchor='middle'>WY</text></svg>">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('wy-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      var l = localStorage.getItem('wy-lang');
+      if (l) document.documentElement.setAttribute('data-lang', l);
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <a href="../" class="nav-logo">Ye<span>ily</span></a>
-      <ul class="nav-links">
-        <li><a href="../#about">About</a></li>
-        <li><a href="../#skills">Skills</a></li>
-        <li><a href="./" class="active">Projects</a></li>
-        <li><a href="../#connect">Connect</a></li>
-        <li>
-          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-            <span>🌙</span>
-          </button>
-        </li>
-      </ul>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../">
+      <span class="brand-mark">WY</span>
+      <span class="brand-name">
+        <span class="zh">叶伟丰</span><span class="en">Weifeng Ye</span>
+        <small><span class="zh">项目全集</span><span class="en">Selected work</span></small>
+      </span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../#about"><span class="zh">关于</span><span class="en">About</span></a></li>
+      <li><a href="#ranking"><span class="zh">排序</span><span class="en">Ranking</span></a></li>
+      <li><a href="#roles"><span class="zh">按岗位</span><span class="en">By role</span></a></li>
+      <li><a href="#all"><span class="zh">全部项目</span><span class="en">All projects</span></a></li>
+      <li><a href="#matrix"><span class="zh">技能矩阵</span><span class="en">Skill matrix</span></a></li>
+      <li><a href="../#contact"><span class="zh">联系</span><span class="en">Contact</span></a></li>
+    </ul>
+
+    <div class="nav-tools">
+      <button class="tool" id="langBtn" type="button" aria-label="Switch language">
+        <span class="zh">EN</span><span class="en">中文</span>
+      </button>
+      <button class="tool" id="themeBtn" type="button" aria-label="Switch colour theme">
+        <span id="themeIcon">☾</span>
+      </button>
+      <button class="tool nav-burger" id="burger" type="button" aria-label="Menu" aria-expanded="false">
+        <span>☰</span>
+      </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <section class="page-header">
-    <div class="container">
-      <h1>Projects</h1>
-      <p>A curated selection of my work in statistics, machine learning, and data science.</p>
+<header class="page-head">
+  <div class="wrap">
+    <p class="crumb"><a href="../"><span class="zh">首页</span><span class="en">Home</span></a> / <span class="zh">项目全集</span><span class="en">Selected work</span></p>
+    <h1><span class="zh">项目全集</span><span class="en">Selected work</span></h1>
+    <p class="lead">
+      <span class="zh">8 个项目，按「含金量 40% + 完成度 30% + 岗位匹配度 30%」的加权分排列。评分口径写在表下，每一项的数字都能在对应仓库的结果文件里查到；排序靠后的项目同样列出——筛选与排序本身就是分析工作的一部分。</span>
+      <span class="en">Eight projects, ordered by a weighted score (substance 40% + completeness 30% + role fit 30%). The rubric sits below the table, every figure traces to a results file in its repo, and the lower-ranked projects are listed too — screening and ranking are part of the analytical work.</span>
+    </p>
+  </div>
+</header>
+
+<!-- ======================= Ranking table ======================= -->
+<section class="section" id="ranking">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>01</b><span class="zh">排序</span><span class="en">Ranking</span></p>
+      <h2><span class="zh">三维评分与排序结果</span><span class="en">Three-dimension scoring and final order</span></h2>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="projects-grid">
+    <div class="figure reveal">
+      <div class="table-scroll">
+        <table class="booktabs">
+          <caption>
+            <b><span class="zh">表 1</span><span class="en">Table 1</span></b> ·
+            <span class="zh">项目三维评分与加权排序（评分口径见下方表注）</span>
+            <span class="en">Three-dimension scoring and weighted ranking of all eight projects (rubric in the table note below)</span>
+          </caption>
+          <thead>
+            <tr>
+              <th style="text-align:center">#</th>
+              <th><span class="zh">项目</span><span class="en">Project</span></th>
+              <th><span class="zh">性质</span><span class="en">Type</span></th>
+              <th style="text-align:center"><span class="zh">含金量</span><span class="en">Substance</span></th>
+              <th style="text-align:center"><span class="zh">完成度</span><span class="en">Complete</span></th>
+              <th style="text-align:center"><span class="zh">匹配度</span><span class="en">Role fit</span></th>
+              <th style="text-align:center"><span class="zh">加权</span><span class="en">Weighted</span></th>
+              <th><span class="zh">仓库</span><span class="en">Repo</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="strong-row">
+              <td class="rk">1</td>
+              <td class="name"><span class="zh">企业破产预警「白盒」模型</span><span class="en">White-box bankruptcy warning model</span><small>High-dim screening · SCAD</small></td>
+              <td><span class="zh">竞赛 · 统计建模大赛</span><span class="en">Competition</span></td>
+              <td class="num">4.0</td><td class="num">5.0</td><td class="num">5.0</td>
+              <td class="num wl">4.60</td>
+              <td><a href="https://github.com/Yei1y/Company-Bankruptcy-Prediction" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr class="strong-row">
+              <td class="rk">2</td>
+              <td class="name"><span class="zh">广深家用智能健康设备市场调查</span><span class="en">Home smart-health devices market survey</span><small>Sampling · segmentation · SEM</small></td>
+              <td><span class="zh">竞赛（省一）+ 省级大创</span><span class="en">Competition + innovation project</span></td>
+              <td class="num">4.5</td><td class="num">4.8</td><td class="num">4.5</td>
+              <td class="num wl">4.59</td>
+              <td><span class="tbl-off"><span class="zh">委托项目，暂不公开</span><span class="en">Client work — private</span></span></td>
+            </tr>
+            <tr>
+              <td class="rk">3</td>
+              <td class="name"><span class="zh">GCor-SIS 超高维稳健特征筛选<small class="name-flag">论文项目</small></span><span class="en">GCor-SIS robust screening<small class="name-flag">paper</small></span><small>Model-free screening · survival</small></td>
+              <td><span class="zh">科研 · SCI 审稿中</span><span class="en">Research · under review</span></td>
+              <td class="num">5.0</td><td class="num">4.5</td><td class="num">3.5</td>
+              <td class="num wl">4.40</td>
+              <td><span class="tbl-off"><span class="zh">审稿中，暂不公开</span><span class="en">Withheld</span></span></td>
+            </tr>
+            <tr>
+              <td class="rk">4</td>
+              <td class="name"><span class="zh">北京住房价格特征价格模型</span><span class="en">Beijing housing hedonic model</span><small>Regression diagnostics</small></td>
+              <td><span class="zh">课程论文</span><span class="en">Course paper</span></td>
+              <td class="num">3.5</td><td class="num">5.0</td><td class="num">4.5</td>
+              <td class="num wl">4.25</td>
+              <td><a href="https://github.com/Yei1y/beijing-housing-regression" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td class="rk">5</td>
+              <td class="name"><span class="zh">AI 采纳与生产率因果推断（DML）</span><span class="en">AI adoption &amp; productivity (DML)</span><small>Causal inference · CATE</small></td>
+              <td><span class="zh">自主研究</span><span class="en">Independent research</span></td>
+              <td class="num">4.0</td><td class="num">4.5</td><td class="num">4.0</td>
+              <td class="num wl">4.15</td>
+              <td><a href="https://github.com/Yei1y/ai-adoption-productivity-dml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr class="strong-row">
+              <td class="rk">6</td>
+              <td class="name"><span class="zh">电商用户行为漏斗分析与转化建模<small class="name-flag">电商项目</small></span><span class="en">E-commerce funnel analysis<small class="name-flag">e-commerce</small></span><small>SQL · funnel · effect size</small></td>
+              <td><span class="zh">自主复现 + 深挖</span><span class="en">Reproduction + extension</span></td>
+              <td class="num">2.0</td><td class="num">3.0</td><td class="num">5.0</td>
+              <td class="num wl">3.20</td>
+              <td><a href="https://github.com/Yei1y/user-behavior-funnel-analysis" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td class="rk">7</td>
+              <td class="name"><span class="zh">影评情感分析与四模型对比</span><span class="en">Sentiment analysis: four-model comparison</span><small>NLP · model comparison</small></td>
+              <td><span class="zh">课程论文</span><span class="en">Course paper</span></td>
+              <td class="num">2.5</td><td class="num">3.5</td><td class="num">2.5</td>
+              <td class="num wl">2.80</td>
+              <td><a href="https://github.com/Yei1y/movies_comments_comparement" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td class="rk">8</td>
+              <td class="name"><span class="zh">THUCNews 中文新闻分类（LSTM vs 朴素贝叶斯）</span><span class="en">THUCNews classification (LSTM vs NB)</span><small>Deep learning · baseline audit</small></td>
+              <td><span class="zh">课程论文</span><span class="en">Course paper</span></td>
+              <td class="num">2.0</td><td class="num">4.0</td><td class="num">2.0</td>
+              <td class="num wl">2.60</td>
+              <td><a href="https://github.com/Yei1y/THUCNews-NLP" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <div class="project-card fade-in">
-          <span class="project-card-tag" style="background: rgba(77,187,213,0.1); color: #4DBBD5;">Regression</span>
-          <h3>Beijing Housing Price Analysis</h3>
-          <p>Comprehensive regression analysis covering data preprocessing, variable selection, model diagnostics, and multi-model comparison using Lianjia Beijing second-hand housing data.</p>
-          <div class="project-card-langs">
-            <span>Python</span>
-            <span>Jupyter</span>
-          </div>
-          <a href="https://github.com/Yei1y/beijing-housing-regression" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
+      <p class="table-note">
+        <b><span class="zh">评分口径</span><span class="en">Scoring rubric</span></b> ·
+        <span class="zh">本人自评（1–5 分），非外部认证。含金量 = 稀缺性 × 难度 × 背书（5 分：SCI 投稿 / 国家级奖项 / 方法创新 + 导师背书；4 分：省级一等奖 / 自主提出研究问题；3 分：省级三等奖 / 优秀课程作业；2 分：练习复现类，无外部背书）。完成度 = 可交付 × 可复现 × 闭环（5 分：论文 + 代码 + 结果全落盘，数字可逐项核验）。岗位匹配度 = 对数据科学 / 数据分析岗的直接对口程度（5 分：SQL + 业务指标 + 归因 + 实验）。加权 = 含金量 × 0.4 + 完成度 × 0.3 + 匹配度 × 0.3。</span>
+        <span class="en">All scores are my own self-assessment (1–5), not external accreditation. Substance = scarcity × difficulty × endorsement (5: SCI submission / national award / methodological novelty with supervisor backing; 4: provincial 1st prize / self-posed research question; 3: provincial 3rd prize / strong coursework; 2: reproduction with no external endorsement). Completeness = deliverable × reproducibility × closure (5: paper + code + every result persisted and checkable). Role fit = directness of match to a data science / analytics role (5: SQL + business metrics + attribution + experimentation). Weighted = substance × 0.4 + completeness × 0.3 + role fit × 0.3.</span>
+      </p>
+    </div>
 
-        <div class="project-card fade-in">
-          <span class="project-card-tag" style="background: rgba(243,155,127,0.1); color: #F39B7F;">Causal Inference</span>
-          <h3>AI Adoption &amp; Productivity</h3>
-          <p>Applied Double/Debiased Machine Learning (DML) to estimate the causal effect of AI adoption on firm productivity using panel data and modern causal inference methods.</p>
-          <div class="project-card-langs">
-            <span>Python</span>
-            <span>R</span>
-          </div>
-          <a href="https://github.com/Yei1y/ai-adoption-productivity-dml" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
+    <div class="split" style="margin-top:52px">
+      <div class="panel reveal">
+        <h3><span class="zh">含金量最高的是第 3 名</span><span class="en">The highest-substance project ranks third</span></h3>
+        <p>
+          <span class="zh">GCor-SIS 的含金量是全项目最高的 5.0，但它是纯科研：没有业务语境，也没有指标体系，对数据分析岗的匹配度只有 3.5。企业破产预警排在前面，是因为它<b>同时</b>踩住三条线——学术上有省级奖项背书，工程上有 20 张可核验的结果表与 Rcpp 并行优化，业务上有代价敏感决策与利润测算。</span>
+          <span class="en">GCor-SIS scores the highest substance (5.0), but it is pure research: no business context, no metric system, and only 3.5 on role fit. The bankruptcy model ranks first because it hits all three lines at once — a provincial award for substance, 20 checkable result tables plus Rcpp parallelism for engineering, and cost-sensitive decisions with profit projections for business.</span>
+        </p>
+      </div>
 
-        <div class="project-card fade-in">
-          <span class="project-card-tag" style="background: rgba(0,160,135,0.1); color: #00A087;">NLP</span>
-          <h3>THUCNews Text Classification</h3>
-          <p>Built text classification models on the THUCNews Chinese news dataset, comparing traditional ML approaches with neural network architectures for document categorization.</p>
-          <div class="project-card-langs">
-            <span>Python</span>
-            <span>scikit-learn</span>
-          </div>
-          <a href="https://github.com/Yei1y/THUCNews-NLP" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
-
-        <div class="project-card fade-in">
-          <span class="project-card-tag" style="background: rgba(132,145,180,0.1); color: #8491B4;">Statistical Modeling</span>
-          <h3>Company Bankruptcy Prediction</h3>
-          <p>High-dimensional interaction mining for corporate bankruptcy warning: an explicit 31,616-dim spline-tensor feature space, GCor-SIS-REDS screening with hand-written Rcpp kernels, and cost-sensitive SCAD penalized logistic regression.</p>
-          <div class="project-card-langs">
-            <span>R</span>
-            <span>Rcpp</span>
-          </div>
-          <a href="https://github.com/Yei1y/Company-Bankruptcy-Prediction" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
-
+      <div class="panel reveal">
+        <h3><span class="zh">第 2 名与第 1 名相差 0.01 分</span><span class="en">No. 2 trails No. 1 by 0.01</span></h3>
+        <p>
+          <span class="zh">市场调查有三个别的项目没有的东西：<b>企业委托</b>（不是自选题目）、<b>一手数据</b>（841 + 476 分钟访谈、747 + 444 份问卷、4,000 条评论，全部自采）、以及<b>完整闭环</b>（抽样设计 → 数据分析 → 人群细分 → SEM 决策路径 → 分市场策略 → 路演答辩 → 大创结项）。这条链路上每一环都有产出，它也是最适合讲成完整案例的一个。</span>
+          <span class="en">The market survey has three things the others lack: a <b>client commission</b> (not a self-chosen topic), <b>first-hand data</b> (841 + 476 minutes of interviews, 747 + 444 questionnaires, 4,000 reviews — all self-collected), and a <b>complete loop</b> (sampling design → analysis → segmentation → SEM decision path → market-specific strategy → pitch → project completion). Every link in that chain produced an artefact, which makes it the easiest project to tell as a full case study.</span>
+        </p>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Yeily. Built with &hearts; in Beijing.</p>
+    <p class="note reveal">
+      <span class="zh">第 6 名的岗位匹配度是唯一满分：SQL 取数、指标体系、漏斗归因、转化建模，正是数据分析岗的日常。它排位靠后，原因是公开项目复现、完成度还在 3.0——<b>这是目前性价比最高的一块补强</b>，补齐后可直接进入前四。</span>
+      <span class="en">No. 6 holds the only perfect role-fit score: SQL querying, metric definitions, funnel attribution and conversion modelling are exactly an analyst's day job. It sits low because it reproduces a public project and its completeness is still 3.0 — <b>the cheapest gap to close right now</b>, and closing it moves the project into the top four.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ======================= By role ======================= -->
+<section class="section section--band" id="roles">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>02</b><span class="zh">按岗位</span><span class="en">By role</span></p>
+      <h2><span class="zh">同一批项目，投不同岗位时排序不同</span><span class="en">The same projects, re-ordered by target role</span></h2>
+      <p>
+        <span class="zh">如果招的不是数据岗，或者想看的是另一个侧面，下表说明我会怎么裁剪重点。</span>
+        <span class="en">If you are hiring for something other than a data role, or want a different angle, this table shows how I would re-cut the emphasis.</span>
+      </p>
     </div>
-  </footer>
 
-  <script src="../assets/js/main.js"></script>
+    <div class="figure reveal">
+      <div class="table-scroll">
+        <table class="booktabs">
+          <caption>
+            <b><span class="zh">表 2</span><span class="en">Table 2</span></b> ·
+            <span class="zh">按目标岗位裁剪的项目优先级</span>
+            <span class="en">Project priority by target role</span>
+          </caption>
+          <thead>
+            <tr>
+              <th><span class="zh">目标岗位</span><span class="en">Target role</span></th>
+              <th><span class="zh">建议排序</span><span class="en">Priority order</span></th>
+              <th><span class="zh">说明</span><span class="en">What it shows</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><span class="zh">数据分析 / 商业分析</span><span class="en">Data / business analytics</span></td>
+              <td><span class="zh">市场调查 → 电商漏斗 → 破产预警 → 房产回归</span><span class="en">Market survey → funnel → bankruptcy → housing</span></td>
+              <td><span class="zh">强调「业务问题 → 口径 → 结论 → 建议」的闭环；破产预警用来补技术深度，GCor-SIS 压缩成一行方法学背书。</span><span class="en">The business-question → definition → conclusion → recommendation loop; the bankruptcy model adds technical depth and GCor-SIS shrinks to a one-line methodological credential.</span></td>
+            </tr>
+            <tr>
+              <td class="name"><span class="zh">数据科学 / 算法工程</span><span class="en">Data science / ML engineering</span></td>
+              <td><span class="zh">破产预警 → GCor-SIS → DML → 市场调查</span><span class="en">Bankruptcy → GCor-SIS → DML → market survey</span></td>
+              <td><span class="zh">强调高维、稀疏、不平衡、可复现；市场调查用来证明业务侧也能承接。</span><span class="en">High-dimensionality, sparsity, imbalance and reproducibility; the market survey shows the business side is covered too.</span></td>
+            </tr>
+            <tr>
+              <td class="name"><span class="zh">AI 产品运营 / 增长</span><span class="en">AI product ops / growth</span></td>
+              <td><span class="zh">市场调查 → 电商漏斗 → 破产预警</span><span class="en">Market survey → funnel → bankruptcy</span></td>
+              <td><span class="zh">市场调查是唯一具备「用户洞察 → 可执行策略」完整链条的项目，最对口；方法论细节全部淡化。</span><span class="en">The market survey is the only project with a full insight-to-action chain; methodological detail is dialled right down.</span></td>
+            </tr>
+            <tr>
+              <td class="name"><span class="zh">研究岗 / 升学申请</span><span class="en">Research / graduate applications</span></td>
+              <td><span class="zh">GCor-SIS → DML → 破产预警 → 房产回归</span><span class="en">GCor-SIS → DML → bankruptcy → housing</span></td>
+              <td><span class="zh">强调 SCI 投稿、引理证明、从零自学 R 实现算法、蒙特卡洛设计与估计量手写实现。</span><span class="en">SCI submission, lemma proofs, a self-taught R implementation, Monte Carlo design and hand-written estimators.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= All projects ======================= -->
+<section class="section" id="all">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>03</b><span class="zh">全部项目</span><span class="en">All projects</span></p>
+      <h2><span class="zh">8 个项目，每个都能指到结果文件</span><span class="en">Eight projects, each traceable to its results</span></h2>
+    </div>
+
+    <div class="cards">
+
+      <!-- 1 -->
+      <article class="card reveal" data-accent="mint">
+        <div class="card-top"><span class="card-rk">01</span><span class="card-kind"><span class="zh">统计建模大赛</span><span class="en">Competition</span></span></div>
+        <h3><span class="zh">企业破产预警「白盒」模型</span><span class="en">White-box corporate bankruptcy warning model</span></h3>
+        <p class="cs">2026-06 · <span class="zh">广东省三等奖 · 第一完成人</span><span class="en">3rd Prize, Guangdong · lead author</span></p>
+        <p class="body">
+          <span class="zh">94 个财务指标 → 显式 31,616 维交互空间 → 稳健筛选 → 代价敏感 SCAD，在保住逐条可解释性的前提下逼近机器学习精度。</span>
+          <span class="en">94 financial ratios → an explicit 31,616-dim interaction space → robust screening → cost-sensitive SCAD: near machine-learning accuracy while every feature stays interpretable.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh">测试集 AUC <b>0.9380</b>；LightGBM 基线 0.9404（91 个特征）</span><span class="en">Test AUC <b>0.9380</b> vs 0.9404 for a 91-feature LightGBM baseline</span></li>
+          <li><span class="zh">16 个非零特征中 <b>15 个是交互项</b>；漏报 / 误杀成本比 30.5 : 1</span><span class="en"><b>15 of 16</b> surviving features are interactions; miss / false-alarm cost ratio 30.5 : 1</span></li>
+        </ul>
+        <div class="card-foot">
+          <a class="link-out" href="https://github.com/Yei1y/Company-Bankruptcy-Prediction" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card reveal" data-accent="pink">
+        <div class="card-top"><span class="card-rk">02</span><span class="card-kind"><span class="zh">市场调查 · 省一</span><span class="en">Market research</span></span></div>
+        <h3><span class="zh">广深两地家用智能健康设备市场调查</span><span class="en">Home smart-health devices in Guangzhou &amp; Shenzhen</span></h3>
+        <p class="cs">2025-04 · <span class="zh">省级一等奖 · 核心成员（数据模块）</span><span class="en">1st Prize, Guangdong · core member (data)</span></p>
+        <p class="body">
+          <span class="zh">企业委托的一手数据调研：不等概率抽样、双问卷发放、加权 K-Means 人群细分、SEM 决策路径，落到分市场策略建议。</span>
+          <span class="en">A client-commissioned survey on first-hand data: unequal-probability sampling, two questionnaire waves, weighted K-Means segmentation, an SEM decision path — down to market-specific recommendations.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh">21 个街道 · 有效问卷 <b>747 + 444</b> 份 · 访谈 841 + 476 分钟</span><span class="en">21 subdistricts · <b>747 + 444</b> valid questionnaires · 841 + 476 interview minutes</span></li>
+          <li><span class="zh">三类人群 13.19% / 56.35% / 30.46%；SEM 解释方差 <b>68.7%</b>，α = 0.983</span><span class="en">Three segments 13.19% / 56.35% / 30.46%; SEM explained <b>68.7%</b>, α = 0.983</span></li>
+        </ul>
+        <div class="card-foot">
+          <span class="link-off"><span class="zh">委托项目，底稿涉密</span><span class="en">Client work — private</span></span>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="card reveal" data-accent="mint">
+        <div class="card-top"><span class="card-rk">03</span><span class="card-kind"><span class="zh">论文项目 · SCI 审稿中</span><span class="en">Paper · under review</span></span></div>
+        <h3><span class="zh">GCor-SIS：超高维生存数据的稳健特征筛选</span><span class="en">GCor-SIS: robust screening for ultrahigh-dimensional survival data</span></h3>
+        <p class="cs">2026-05 · <span class="zh">第二作者 · 中国人民大学全国高校本科生统计论坛报告</span><span class="en">Second author · presented at Renmin University</span></p>
+        <p class="body">
+          <span class="zh">参与提出基于格罗滕迪克相关的无模型筛选方法，引入数据拆分反射控制 FDR，并推广到生存数据。负责部分引理证明、R 从零实现、蒙特卡洛模拟与论文主笔。</span>
+          <span class="en">A model-free screener built on Grothendieck's correlation with a data-splitting reflection for FDR control, extended to survival data. I proved part of the key lemmas, implemented it in R from scratch, ran the Monte Carlo study and wrote the paper.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh">强筛选一致性的证明<b>无需次指数尾部条件</b>；FDR ≤ α + o(1)</span><span class="en">Consistency proved <b>without sub-exponential tail conditions</b>; FDR ≤ α + o(1)</span></li>
+          <li><span class="zh">NKI295 真实数据 <b>C-index 0.7603</b>（对比方法中最高）</span><span class="en">On NKI295, <b>C-index 0.7603</b> — highest among competitors</span></li>
+        </ul>
+        <div class="card-foot">
+          <span class="link-off"><span class="zh">论文审稿中，代码暂不公开</span><span class="en">Code withheld pending review</span></span>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card reveal" data-accent="sky">
+        <div class="card-top"><span class="card-rk">04</span><span class="card-kind"><span class="zh">课程论文</span><span class="en">Course paper</span></span></div>
+        <h3><span class="zh">北京住房价格：特征价格模型与多元回归实证</span><span class="en">Beijing housing prices: a hedonic model</span></h3>
+        <p class="cs"><span class="zh">现代回归分析 · 独立完成</span><span class="en">Modern Regression Analysis · sole author</span></p>
+        <p class="body">
+          <span class="zh">带时间—区域双向固定效应的半对数特征价格模型，量化两个会被朴素统计系统性误读的效应，并完成 VIF、异方差、强影响点全流程诊断。</span>
+          <span class="en">A semi-log hedonic model with two-way fixed effects, quantifying two effects that naive statistics systematically misread, with full VIF, heteroscedasticity and influence diagnostics.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh"><b>318,160 条</b>成交记录 · 64 个特征 · 近地铁溢价 27.6% → <b>5.8%</b></span><span class="en"><b>318,160</b> transactions · 64 features · subway premium 27.6% → <b>5.8%</b></span></li>
+          <li><span class="zh">R² 0.8185；更精确的多项式模型因条件数 1.11 × 10<sup>12</sup> 被否</span><span class="en">R² 0.8185; a more accurate polynomial model rejected at a condition number of 1.11 × 10<sup>12</sup></span></li>
+        </ul>
+        <div class="card-foot">
+          <a class="link-out" href="https://github.com/Yei1y/beijing-housing-regression" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card reveal" data-accent="peach">
+        <div class="card-top"><span class="card-rk">05</span><span class="card-kind"><span class="zh">自主研究</span><span class="en">Independent</span></span></div>
+        <h3><span class="zh">AI 采纳与生产率：双重机器学习因果推断</span><span class="en">AI adoption &amp; productivity: double/debiased ML</span></h3>
+        <p class="cs"><span class="zh">工作论文 · 独立完成（含 LaTeX 论文与代码）</span><span class="en">Working paper · sole author (LaTeX + code)</span></p>
+        <p class="body">
+          <span class="zh">15 万家企业微观数据上，手写 Neyman 正交评分与交叉拟合，估计 AI 采纳对劳动生产率的因果效应并做异质性分析。主要结论是一次不显著的零效应。</span>
+          <span class="en">On 150,000 firms, a hand-written Neyman-orthogonal score with cross-fitting estimates the causal effect of AI adoption on productivity, plus heterogeneity analysis. The headline result is an insignificant null.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh">ATE = <b>+0.6%（p = 0.342）</b>；LASSO / RF / XGBoost 三法一致</span><span class="en">ATE = <b>+0.6% (p = 0.342)</b>; consistent across LASSO / RF / XGBoost</span></li>
+          <li><span class="zh">CATE 标准差 <b>0.044</b>（≈ ATE 的 8 倍）；46.1% 企业 CATE &gt; 0.01</span><span class="en">CATE sd <b>0.044</b> (≈ 8× the ATE); 46.1% of firms have CATE &gt; 0.01</span></li>
+        </ul>
+        <div class="card-foot">
+          <a class="link-out" href="https://github.com/Yei1y/ai-adoption-productivity-dml" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card reveal" data-accent="lemon">
+        <div class="card-top"><span class="card-rk">06</span><span class="card-kind"><span class="zh">电商项目 · 对口度满分</span><span class="en">E-commerce · best role fit</span></span></div>
+        <h3><span class="zh">电商用户行为漏斗分析与转化建模</span><span class="en">E-commerce funnel analysis and conversion modelling</span></h3>
+        <p class="cs"><span class="zh">公开项目批判式复现与深挖 · 独立完成</span><span class="en">Critical reproduction and extension · sole author</span></p>
+        <p class="body">
+          <span class="zh">MySQL 建库取数、漏斗拆解、效应量检验与转化建模，并指出最亮眼的那个指标存在循环论证，不能作为运营抓手。</span>
+          <span class="en">MySQL ingestion and querying, funnel decomposition, effect-size testing and conversion modelling — then flagging that the most striking indicator is circular and cannot be used as a lever.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh">10 万条会话 → 清洗后 <b>97,274</b>；最大流失环节转化率 <b>12.63%</b>（流失 41,870 次）</span><span class="en">100k sessions → <b>97,274</b>; the bottleneck step converts at <b>12.63%</b> (41,870 lost)</span></li>
+          <li><span class="zh">卡方 + BH 校正 + Cramér's V；仅活跃度 V = <b>0.2657</b> 有实质关联；AUC 0.6939</span><span class="en">Chi-square + BH + Cramér's V; only engagement (V = <b>0.2657</b>) carries real association; AUC 0.6939</span></li>
+        </ul>
+        <div class="card-foot">
+          <a class="link-out" href="https://github.com/Yei1y/user-behavior-funnel-analysis" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="card reveal" data-accent="mint">
+        <div class="card-top"><span class="card-rk">07</span><span class="card-kind"><span class="zh">课程论文</span><span class="en">Course paper</span></span></div>
+        <h3><span class="zh">影评情感分析与四模型对比</span><span class="en">Film-review sentiment analysis: four models compared</span></h3>
+        <p class="cs"><span class="zh">大数据分析 · 独立完成</span><span class="en">Big-data analysis · sole author</span></p>
+        <p class="body">
+          <span class="zh">2,400 条豆瓣短评上对比朴素贝叶斯、逻辑回归、SVM、LSTM 四个模型，并核查 SnowNLP 词典法与自训练模型的标签口径冲突——结论的价值在于<b>数据质量核查</b>。</span>
+          <span class="en">Four models (naive Bayes, logistic regression, SVM, LSTM) compared on 2,400 Douban reviews, plus an audit of the label mismatch between SnowNLP's lexicon method and the trained models — its value lies in <b>data-quality vigilance</b>.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh">四模型 5 折交叉验证 acc <b>0.6325–0.7587</b>（训练集 0.9569–0.9803，过拟合明显）</span><span class="en">5-fold CV accuracy <b>0.6325–0.7587</b> (training 0.9569–0.9803 — clear overfitting)</span></li>
+          <li><span class="zh">SnowNLP 把 <b>61.95%</b> 的差评误判为正；「一般」与「差评」标签重合 Jaccard = 1.000</span><span class="en">SnowNLP mislabels <b>61.95%</b> of negative reviews; the “average” and “negative” labels overlap with Jaccard = 1.000</span></li>
+        </ul>
+        <div class="card-foot">
+          <a class="link-out" href="https://github.com/Yei1y/movies_comments_comparement" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="card reveal" data-accent="sky">
+        <div class="card-top"><span class="card-rk">08</span><span class="card-kind"><span class="zh">课程论文</span><span class="en">Course paper</span></span></div>
+        <h3><span class="zh">THUCNews 中文新闻分类：LSTM vs 朴素贝叶斯</span><span class="en">THUCNews classification: LSTM vs naive Bayes</span></h3>
+        <p class="cs"><span class="zh">自然语言处理 · 独立完成</span><span class="en">NLP · sole author</span></p>
+        <p class="body">
+          <span class="zh">20 万条新闻、10 个类别上的深度模型与传统基线对照。真正的发现不是 LSTM 更准，而是<b>基线的分词修正后差距从 59 个百分点缩到 2.1 个百分点</b>——基线没调好时的对比会严重高估深度学习带来的收益。</span>
+          <span class="en">A deep model against a classical baseline on 200,000 news articles across 10 classes. The real finding is not that LSTM wins, but that <b>fixing the baseline's tokenisation shrank the gap from 59 to 2.1 percentage points</b> — an untuned baseline badly overstates the benefit of deep learning.</span>
+        </p>
+        <ul class="kpis">
+          <li><span class="zh">LSTM 测试 acc <b>0.8868</b>；朴素贝叶斯 0.2967 → 分词修正后 <b>0.8658</b></span><span class="en">LSTM test acc <b>0.8868</b>; naive Bayes 0.2967 → <b>0.8658</b> after fixing tokenisation</span></li>
+          <li><span class="zh">差距从 59 pp 修正为 <b>2.10 pp</b></span><span class="en">Gap corrected from 59 pp to <b>2.10 pp</b></span></li>
+        </ul>
+        <div class="card-foot">
+          <a class="link-out" href="https://github.com/Yei1y/THUCNews-NLP" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Skill matrix ======================= -->
+<section class="section section--band" id="matrix">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>04</b><span class="zh">技能矩阵</span><span class="en">Skill matrix</span></p>
+      <h2><span class="zh">技能 → 证据项目 → 实际用到的深度</span><span class="en">Skill → evidence project → depth actually used</span></h2>
+    </div>
+
+    <div class="figure reveal">
+      <div class="table-scroll">
+        <table class="booktabs">
+          <caption>
+            <b><span class="zh">表 3</span><span class="en">Table 3</span></b> ·
+            <span class="zh">按项目反推的技能矩阵，可用于核验简历「技能」栏的每一行</span>
+            <span class="en">A skill matrix reverse-engineered from the projects, so every line of a CV can be checked</span>
+          </caption>
+          <thead>
+            <tr>
+              <th><span class="zh">技能</span><span class="en">Skill</span></th>
+              <th><span class="zh">证据项目</span><span class="en">Evidence</span></th>
+              <th><span class="zh">实际用到的深度</span><span class="en">Depth actually used</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">R</td>
+              <td><span class="zh">GCor-SIS、破产预警、市场调查</span><span class="en">GCor-SIS, bankruptcy, market survey</span></td>
+              <td><span class="zh">能写 Rcpp C++ 扩展、20 核并行、控制内存峰值</span><span class="en">Rcpp C++ extensions, 20-core parallelism, memory-peak control</span></td>
+            </tr>
+            <tr>
+              <td class="name">Python</td>
+              <td><span class="zh">房产回归、DML、电商漏斗、NLP 项目、市场调查</span><span class="en">Housing, DML, funnel, NLP, market survey</span></td>
+              <td><span class="zh">pandas / numpy 数据管线、statsmodels 计量诊断、scikit-learn、PyTorch</span><span class="en">pandas / numpy pipelines, statsmodels diagnostics, scikit-learn, PyTorch</span></td>
+            </tr>
+            <tr>
+              <td class="name">SQL</td>
+              <td><span class="zh">电商漏斗（24 条查询）、计算机二级 MySQL</span><span class="en">Funnel (24 queries), Level-2 MySQL certificate</span></td>
+              <td><span class="zh">MySQL 8.0 显式 DDL、窗口函数算占比；CTE / 留存取数在补</span><span class="en">MySQL 8.0 explicit DDL, window functions for shares; CTE / retention querying in progress</span></td>
+            </tr>
+            <tr>
+              <td class="name">LaTeX</td>
+              <td><span class="zh">DML 论文、房产回归论文、THUCNews 论文</span><span class="en">DML, housing and THUCNews papers</span></td>
+              <td><span class="zh">公式推导、三线表、代码附录、XeLaTeX 两遍编译</span><span class="en">Derivations, booktabs tables, code appendices, two-pass XeLaTeX builds</span></td>
+            </tr>
+            <tr>
+              <td class="name">SPSS / AMOS</td>
+              <td><span class="zh">市场调查</span><span class="en">Market survey</span></td>
+              <td><span class="zh">问卷信效度全套（Cronbach's α、KMO、Bartlett）+ SEM 建模 + 简单斜率图</span><span class="en">Full reliability/validity battery (α, KMO, Bartlett) + SEM + simple-slope plots</span></td>
+            </tr>
+            <tr>
+              <td class="name"><span class="zh">统计方法</span><span class="en">Statistical methods</span></td>
+              <td><span class="zh">全部项目</span><span class="en">All projects</span></td>
+              <td><span class="zh">特征筛选（SIS / SCAD）、惩罚回归、生存分析、因果推断（DML / 因果森林）、回归诊断、抽样设计、列联表与效应量、聚类</span><span class="en">Screening (SIS / SCAD), penalized regression, survival analysis, causal inference (DML / causal forests), regression diagnostics, sampling design, contingency tables and effect size, clustering</span></td>
+            </tr>
+            <tr>
+              <td class="name"><span class="zh">工程实践</span><span class="en">Engineering practice</span></td>
+              <td><span class="zh">破产预警、房产回归、DML、THUCNews</span><span class="en">Bankruptcy, housing, DML, THUCNews</span></td>
+              <td><span class="zh">脚本编号化 + 自包含、随机种子固定、结果落盘 CSV、代码与结论分离、Git / GitHub</span><span class="en">Numbered self-contained scripts, fixed seeds, results exported to CSV, code separated from conclusions, Git / GitHub</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        <b><span class="zh">诚实的空白</span><span class="en">Honest gaps</span></b> ·
+        <span class="zh">还没有实际用过的：Docker / 服务部署、API 调用与 RAG / Agent 工作流、A/B 实验设计、SQL 留存与漏斗自连接取数。这些没有写进技能栏，正在补。</span>
+        <span class="en">Not yet used in practice: Docker / deployment, API calls and RAG / agent workflows, A/B experiment design, retention and self-join funnel SQL. None of these appear in my skills section; they are being built.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CTA ======================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="head head--center reveal">
+      <p class="head-label"><b>05</b><span class="zh">下一步</span><span class="en">Next</span></p>
+      <h2><span class="zh">想看看代码，或者聊聊某个项目？</span><span class="en">Want to read the code, or talk through a project?</span></h2>
+      <p>
+        <span class="zh">每个公开仓库的 README 都写了方法、复现步骤与已知局限；如果关心的是某个具体环节，告诉我，我可以把对应脚本和结果表的位置发给你。</span>
+        <span class="en">Every public repo's README documents the method, reproduction steps and known limitations. If a specific step interests you, tell me and I will point you to the exact script and result table.</span>
+      </p>
+    </div>
+
+    <div class="connect" style="max-width:820px;margin-inline:auto">
+      <a class="reveal" data-accent="mint" href="mailto:yeily_github@163.com">
+        <span class="ico">✉️</span>
+        <span class="lb">Email</span>
+        <span class="vl">yeily_github@163.com</span>
+      </a>
+      <a class="reveal" data-accent="sky" href="https://github.com/Yei1y" target="_blank" rel="noopener">
+        <span class="ico">🐙</span>
+        <span class="lb">GitHub</span>
+        <span class="vl">@Yei1y</span>
+      </a>
+      <a class="reveal" data-accent="lav" href="../">
+        <span class="ico">🏠</span>
+        <span class="lb"><span class="zh">返回</span><span class="en">Back</span></span>
+        <span class="vl"><span class="zh">首页</span><span class="en">Home</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <p>&copy; <span id="year">2026</span> <span class="zh">叶伟丰 · Weifeng Ye</span><span class="en">Weifeng Ye (叶伟丰)</span></p>
+    <p><span class="zh">手写 HTML · CSS · JavaScript，无框架、无追踪</span><span class="en">Hand-written HTML · CSS · JavaScript — no framework, no tracking</span></p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="../assets/js/main.js"></script>
 </body>
 </html>

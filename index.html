@@ -1,266 +1,909 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="zh-CN" data-theme="light" data-lang="zh" data-accent="mint">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Yeily — Statistics & Data Science. Personal homepage and portfolio.">
-  <title>Yeily | Statistics & Data Science</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📊</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="叶伟丰 Weifeng Ye — 暨南大学经济统计学本科，推免至上海财经大学应用统计学（数据科学与商务统计）。方向：高维特征筛选、因果推断、抽样调查与用户行为分析。">
+<meta name="author" content="Weifeng Ye 叶伟丰">
+<meta name="keywords" content="叶伟丰, Weifeng Ye, 应用统计学, 经济统计学, 数据科学, 数据分析, 因果推断, 高维特征筛选, 上海财经大学, 暨南大学">
+<meta name="theme-color" content="#FBFAF6">
+<meta property="og:title" content="叶伟丰 · Weifeng Ye — 统计与数据科学">
+<meta property="og:description" content="把数据变成能核验、能落地的结论。高维特征筛选 · 因果推断 · 抽样调查 · 用户行为分析。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yei1y.github.io/">
+<title>叶伟丰 · Weifeng Ye — 统计与数据科学 / Statistics &amp; Data Science</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='26' fill='%23DCF4EA'/><text x='50' y='68' font-size='46' font-family='Georgia,serif' font-weight='bold' fill='%231F7A66' text-anchor='middle'>WY</text></svg>">
+<script>
+  // Apply stored preferences before first paint to avoid a flash of the wrong theme.
+  (function () {
+    try {
+      var t = localStorage.getItem('wy-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      var l = localStorage.getItem('wy-lang');
+      if (l) document.documentElement.setAttribute('data-lang', l);
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
-  <!-- ============ Navigation ============ -->
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">Ye<span>ily</span></a>
-      <ul class="nav-links">
-        <li><a href="#about" class="active">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#connect">Connect</a></li>
-        <li>
-          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-            <span>🌙</span>
-          </button>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
-  <!-- ============ Hero ============ -->
-  <section class="hero">
-    <div class="container hero-content">
-      <p class="hero-greeting">Hello, I'm</p>
-      <h1 class="hero-name">Yeily</h1>
-      <p class="hero-title">Statistics &middot; Data Science &middot; Causal Inference</p>
-      <p class="hero-desc">
-        B.S. in Economic Statistics, incoming M.S. in Applied Statistics.
-        I turn data into decisions through rigorous statistical reasoning and
-        thoughtful empirical analysis.
+<!-- ======================= Navigation ======================= -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">WY</span>
+      <span class="brand-name">
+        <span class="zh">叶伟丰</span><span class="en">Weifeng Ye</span>
+        <small><span class="zh">统计 · 数据科学</span><span class="en">Statistics · Data Science</span></small>
+      </span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about"><span class="zh">关于</span><span class="en">About</span></a></li>
+      <li><a href="#work"><span class="zh">项目</span><span class="en">Work</span></a></li>
+      <li><a href="#skills"><span class="zh">技能</span><span class="en">Skills</span></a></li>
+      <li><a href="#honors"><span class="zh">荣誉</span><span class="en">Honors</span></a></li>
+      <li><a href="projects/"><span class="zh">项目全集</span><span class="en">All work</span></a></li>
+      <li><a href="#contact"><span class="zh">联系</span><span class="en">Contact</span></a></li>
+    </ul>
+
+    <div class="nav-tools">
+      <button class="tool" id="langBtn" type="button" aria-label="Switch language">
+        <span class="zh">EN</span><span class="en">中文</span>
+      </button>
+      <button class="tool" id="themeBtn" type="button" aria-label="Switch colour theme">
+        <span id="themeIcon">☾</span>
+      </button>
+      <button class="tool nav-burger" id="burger" type="button" aria-label="Menu" aria-expanded="false">
+        <span>☰</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================= Hero ======================= -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div>
+        <p class="eyebrow">
+          <i aria-hidden="true"></i>
+          <span class="zh">暨南大学 经济统计学 &nbsp;→&nbsp; 上海财经大学 应用统计学</span>
+          <span class="en">B.S. Economic Statistics, Jinan University &nbsp;→&nbsp; M.S. Applied Statistics, SUFE</span>
+        </p>
+
+        <h1>
+          <span class="zh">叶伟丰</span>
+          <span class="en">Weifeng Ye</span>
+          <span class="latin"><span class="zh">Weifeng Ye</span><span class="en">叶伟丰</span></span>
+        </h1>
+
+        <p class="hero-motto">
+          <span class="zh">「把数据变成能核验、能落地的结论。」</span>
+          <span class="en">“Turning data into conclusions you can verify and act on.”</span>
+        </p>
+
+        <p class="hero-lead">
+          <span class="zh">经济统计学本科在读，推免至上海财经大学应用统计学（<b>数据科学与商务统计</b>方向）。做过的事沿一条线：<b>31,616 维</b>交互特征空间里的稳健筛选与蒙特卡洛模拟，<b>747 份一手问卷</b>支撑的市场判断，<b>10 万条电商会话</b>中真正该修的那一环漏斗。方法可以很重，结论必须能被核验。</span>
+          <span class="en">B.S. in Economic Statistics, admitted by recommendation to the M.S. in Applied Statistics at Shanghai University of Finance and Economics (<b>Data Science &amp; Business Statistics</b>). One thread runs through the work: robust screening and Monte Carlo studies in a <b>31,616-dimensional</b> interaction space, a market judgement built on <b>747 first-hand questionnaires</b>, and the one funnel step worth fixing among <b>100,000 e-commerce sessions</b>. The methods can be heavy; the conclusions have to be verifiable.</span>
+        </p>
+
+        <div class="roles">
+          <span class="role is-key"><span class="zh">数据科学 / 数据分析</span><span class="en">Data Science / Analytics</span></span>
+          <span class="role"><span class="zh">统计建模 · 因果推断</span><span class="en">Statistical modelling · Causal inference</span></span>
+          <span class="role"><span class="zh">AI 产品与增长</span><span class="en">AI product &amp; growth</span></span>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn btn--solid" href="#work">
+            <span class="zh">查看精选项目</span><span class="en">Selected work</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="projects/">
+            <span class="zh">项目全集（8 个）</span><span class="en">All 8 projects</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <aside class="card-id">
+        <div class="card-id-head">
+          <span class="card-id-mark">WY</span>
+          <div>
+            <h2><span class="zh">叶伟丰</span><span class="en">Weifeng Ye</span></h2>
+            <p>@Yei1y</p>
+          </div>
+        </div>
+
+        <ul class="card-id-list">
+          <li>
+            <span class="k">🎓</span>
+            <span class="v">
+              <span class="zh"><b>暨南大学</b> 经济学院 · 经济统计学（本科在读）<br><b>上海财经大学</b> · 应用统计学硕士（推免录取）</span>
+              <span class="en"><b>Jinan University</b>, School of Economics — B.S. Economic Statistics<br><b>SUFE</b> — M.S. Applied Statistics (admitted by recommendation)</span>
+            </span>
+          </li>
+          <li>
+            <span class="k">📈</span>
+            <span class="v">
+              <span class="zh">加权平均绩点 <b>4.18 / 5.0</b> · 专业排名 <b>5 / 85</b>（前 6%）· CET-6 551</span>
+              <span class="en">Weighted GPA <b>4.18 / 5.0</b> · major rank <b>5 / 85</b> (top 6%) · CET-6 551</span>
+            </span>
+          </li>
+          <li>
+            <span class="k">🏅</span>
+            <span class="v">
+              <span class="zh"><b>2025 国家奖学金</b> · 全国大学生数学竞赛广东省一等奖</span>
+              <span class="en"><b>2025 National Scholarship</b> · 1st Prize (Guangdong), National College Mathematics Competition</span>
+            </span>
+          </li>
+          <li>
+            <span class="k">🎯</span>
+            <span class="v">
+              <span class="zh">求职方向：数据科学 / 数据分析，AI 产品与增长运营</span>
+              <span class="en">Target roles: data science / analytics; AI product &amp; growth</span>
+            </span>
+          </li>
+          <li>
+            <span class="k">📍</span>
+            <span class="v">
+              <span class="zh">现居广州（就学）· 可实习：<b>广州优先，深圳可接受</b></span>
+              <span class="en">Based in Guangzhou · available in <b>Guangzhou (first choice), Shenzhen</b></span>
+            </span>
+          </li>
+          <li>
+            <span class="k">✉️</span>
+            <span class="v"><a href="mailto:yeily_github@163.com">yeily_github@163.com</a></span>
+          </li>
+        </ul>
+      </aside>
+
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="wrap">
+      <div class="strip-grid">
+        <div class="metric">
+          <div class="num">4.18<small> / 5.0</small></div>
+          <div class="cap"><span class="zh">加权平均绩点</span><span class="en">Weighted GPA</span></div>
+        </div>
+        <div class="metric">
+          <div class="num">5<small> / 85</small></div>
+          <div class="cap"><span class="zh">专业排名（前 6%）</span><span class="en">Major rank (top 6%)</span></div>
+        </div>
+        <div class="metric">
+          <div class="num">7<small> <span class="zh">个</span><span class="en">repos</span></small></div>
+          <div class="cap"><span class="zh">公开项目仓库，脚本与结果一并落盘</span><span class="en">Public repos, scripts and results committed</span></div>
+        </div>
+        <div class="metric">
+          <div class="num">1<small> <span class="zh">篇</span><span class="en">paper</span></small></div>
+          <div class="cap"><span class="zh">SCI 论文在投（审稿返修中）</span><span class="en">SCI paper under review</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= About ======================= -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>01</b><span class="zh">关于</span><span class="en">About</span></p>
+      <h2><span class="zh">我在做什么</span><span class="en">What I work on</span></h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="prose reveal">
+        <p>
+          <span class="zh">我的训练来自<strong>统计学</strong>：数理统计、贝叶斯统计、统计预测与决策、大数据案例分析构成课程主干，高维筛选、惩罚回归、生存分析、因果推断与抽样设计是反复用到的工具。这套工具落在四种很不一样的问题上——<span class="hl hl--mint">一篇超高维特征筛选的学术论文</span>、<span class="hl hl--lemon">一次受企业委托的市场调查</span>、<span class="hl hl--lav">一套企业破产预警的可解释模型</span>，以及<span class="hl hl--sky">一次电商漏斗的批判式复现</span>。</span>
+          <span class="en">My training is in <strong>statistics</strong> — mathematical statistics, Bayesian inference, forecasting and decision theory, large-scale data case studies — with high-dimensional screening, penalized regression, survival analysis, causal inference and sampling design as the working toolkit. That toolkit lands on four very different problems: <span class="hl hl--mint">an academic paper on ultrahigh-dimensional feature screening</span>, <span class="hl hl--lemon">a client-commissioned market survey</span>, <span class="hl hl--lav">an interpretable corporate bankruptcy-warning model</span>, and <span class="hl hl--sky">a critical reproduction of an e-commerce funnel analysis</span>.</span>
+        </p>
+        <p>
+          <span class="zh">工作习惯围绕<strong>可核验</strong>展开：脚本编号化、随机种子固定、每一步结果落盘，README 里写清楚已知局限。破产预警的 16 个幸存特征每一个都能回溯到筛选与惩罚回归的中间结果；因果推断那篇论文的主要结论是一次<strong>不显著的零效应</strong>；电商漏斗里，我指出自己最亮眼的指标存在循环论证。这些判断不讨巧，但它们更接近真实的分析工作。</span>
+          <span class="en">The working habit is built around <strong>verifiability</strong>: numbered scripts, fixed random seeds, every step written to disk, and known limitations stated in the README. Each of the 16 surviving features in the bankruptcy model traces back to intermediate screening and penalized-regression output; the headline result of the causal-inference paper is an <strong>insignificant null</strong>; and in the funnel project I flag that my most striking indicator is circular by construction. Those are not the flattering conclusions, but they are closer to real analytical work.</span>
+        </p>
+        <p>
+          <span class="zh">接下来想补的是方法的另一半：SQL 进阶取数、可复现的数据管线，以及把一个模型真正交付出去、而不止停在报告里的能力。</span>
+          <span class="en">What I want to add next is the other half of the craft: advanced SQL, reproducible data pipelines, and the ability to ship a model rather than stopping at the report.</span>
+        </p>
+      </div>
+
+      <div class="facts">
+        <div class="fact reveal" data-accent="mint">
+          <span class="ico">🎓</span>
+          <div>
+            <h3><span class="zh">教育背景</span><span class="en">Education</span></h3>
+            <p>
+              <span class="zh"><strong>暨南大学</strong> 经济学院 · 经济统计学（本科在读）<br><strong>上海财经大学</strong> · 应用统计学专业硕士（推免录取），方向：数据科学与商务统计</span>
+              <span class="en"><strong>Jinan University</strong>, School of Economics — B.S. Economic Statistics<br><strong>SUFE</strong> — M.S. Applied Statistics (admitted), Data Science &amp; Business Statistics</span>
+            </p>
+          </div>
+        </div>
+        <div class="fact reveal" data-accent="sky">
+          <span class="ico">🔬</span>
+          <div>
+            <h3><span class="zh">方法兴趣</span><span class="en">Methods</span></h3>
+            <p>
+              <span class="zh">高维特征筛选 · 惩罚回归（SCAD / LASSO）· 生存分析 · 因果推断（DML / 因果森林）· 抽样设计 · 结构方程模型</span>
+              <span class="en">High-dimensional screening · penalized regression (SCAD / LASSO) · survival analysis · causal inference (DML / causal forests) · sampling design · structural equation modelling</span>
+            </p>
+          </div>
+        </div>
+        <div class="fact reveal" data-accent="lav">
+          <span class="ico">🛠️</span>
+          <div>
+            <h3><span class="zh">常用工具</span><span class="en">Toolchain</span></h3>
+            <p>
+              <span class="zh">Python（pandas / scikit-learn / statsmodels / PyTorch）· R（含 Rcpp 并行）· SQL（MySQL 8.0）· LaTeX · SPSS / AMOS</span>
+              <span class="en">Python (pandas / scikit-learn / statsmodels / PyTorch) · R (incl. Rcpp parallelism) · SQL (MySQL 8.0) · LaTeX · SPSS / AMOS</span>
+            </p>
+          </div>
+        </div>
+        <div class="fact reveal" data-accent="peach">
+          <span class="ico">🧭</span>
+          <div>
+            <h3><span class="zh">在找什么机会</span><span class="en">Looking for</span></h3>
+            <p>
+              <span class="zh">主线：数据科学 / 数据分析实习；并行：AI 产品运营与增长。广州优先，深圳可接受。</span>
+              <span class="en">Primary: a data science / analytics internship. Parallel: AI product operations &amp; growth. Guangzhou first, Shenzhen acceptable.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Selected work ======================= -->
+<section class="section section--band" id="work">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>02</b><span class="zh">精选项目</span><span class="en">Selected work</span></p>
+      <h2><span class="zh">六个能追溯到原始结果的项目</span><span class="en">Six projects that trace back to raw output</span></h2>
+      <p>
+        <span class="zh">覆盖高维筛选、因果推断、市场调查与用户行为分析——从假设到结论的每一步都留有可复核的产物。每个项目下面的数字都能在对应仓库的结果文件中查到；完整排序、评分口径与按岗位裁剪见 <a href="projects/"><strong>项目全集</strong></a>。</span>
+        <span class="en">Covering high-dimensional screening, causal inference, market research and user-behaviour analysis — every step from hypothesis to conclusion leaves an auditable artefact. Each figure below traces to a results file in the corresponding repo; the full ranking, rubric and role-specific cuts are on the <a href="projects/"><strong>all-projects page</strong></a>.</span>
       </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects &darr;</a>
-        <a href="#connect" class="btn btn-secondary">Get in Touch</a>
-      </div>
     </div>
-  </section>
 
-  <!-- ============ About ============ -->
-  <section id="about" class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <p class="section-label">About</p>
-        <h2 class="section-title">Who I Am</h2>
-        <p class="section-subtitle">A statistics student passionate about understanding the world through data.</p>
-      </div>
-      <div class="about-grid">
-        <div class="about-text fade-in">
-          <p>
-            I'm an undergraduate student in Economic Statistics, about to begin my
-            Master's journey in Applied Statistics. My academic interests center on
-            <strong>causal inference</strong>, <strong>statistical modeling</strong>,
-            and <strong>machine learning</strong> — with a strong emphasis on
-            methodological rigor and reproducible research.
+    <div class="entries">
+
+      <!-- 01 -->
+      <article class="entry reveal" data-accent="mint">
+        <div class="entry-rank">
+          <span class="n">01</span>
+          <span class="k"><span class="zh">统计建模</span><span class="en">Modelling</span></span>
+        </div>
+        <div>
+          <h3><span class="zh">企业破产预警「白盒」模型</span><span class="en">A white-box corporate bankruptcy warning model</span></h3>
+          <p class="sub"><span class="zh">高维交互挖掘 · 稳健特征筛选 · 代价敏感惩罚回归</span><span class="en">High-dimensional interaction mining · robust screening · cost-sensitive penalized regression</span></p>
+
+          <p class="meta">
+            <em><span class="zh">全国大学生统计建模大赛</span><span class="en">National Statistical Modeling Competition</span></em>
+            <span class="sep">·</span>
+            <span class="zh"><b>第一完成人</b>，独立完成建模与写作</span>
+            <span class="en"><b>Lead author</b>, modelling and writing done independently</span>
+            <span class="sep">·</span>
+            <span class="zh">广东省三等奖（2026-06）</span>
+            <span class="en">3rd Prize, Guangdong (2026-06)</span>
           </p>
-          <p>
-            I believe that good statistics is good storytelling: every dataset has
-            a narrative waiting to be uncovered, and the role of a statistician is
-            to let that story emerge honestly and clearly.
+
+          <p class="desc">
+            <span class="zh">把 94 个财务指标按杜邦模块做样条展开与张量积交叉，<strong>显式构造 31,616 维交互特征空间</strong>，用自研的 GCor-SIS-REDS 流程筛选，再以代价敏感 SCAD 建模——在保住逐条可解释性的前提下拿到机器学习级别的判别精度。</span>
+            <span class="en">Spline-expanded and tensor-crossed 94 financial ratios by DuPont block into an <strong>explicit 31,616-dimensional interaction space</strong>, screened with a self-built GCor-SIS-REDS routine, then modelled with cost-sensitive SCAD — machine-learning discrimination while every feature stays interpretable.</span>
           </p>
-          <p>
-            When I'm not running regressions or debugging Python scripts, you'll
-            find me reading about Bayesian methods, tinkering with NLP models,
-            or exploring Beijing's café scene.
+
+          <div class="stats">
+            <div class="stat">
+              <b>0.9380</b>
+              <span><span class="zh">测试集 AUC，KS 0.7638</span><span class="en">Test AUC, KS 0.7638</span></span>
+            </div>
+            <div class="stat">
+              <b>0.0024</b>
+              <span><span class="zh">与 91 特征 LightGBM 黑盒的差距</span><span class="en">Gap to a 91-feature LightGBM black box</span></span>
+            </div>
+            <div class="stat">
+              <b>3,510 / 8,944</b>
+              <span><span class="zh">万元 · 漏报误杀成本比 30.5 : 1 下的净利润</span><span class="en">10k CNY net profit at a 30.5 : 1 miss / false-alarm cost ratio</span></span>
+            </div>
+          </div>
+
+          <figure class="fig">
+            <figcaption>
+              <b><span class="zh">图 1</span><span class="en">Fig. 1</span></b>
+              <span class="zh">从 94 个原始指标到 16 个可解释特征：候选空间逐级收缩</span>
+              <span class="en">From 94 raw ratios to 16 interpretable features: the candidate space contracts in stages</span>
+            </figcaption>
+            <ul class="bars bars--log" role="list">
+              <li>
+                <span class="lb"><span class="zh">原始财务指标</span><span class="en">Raw ratios</span><em>6,819 × 94</em></span>
+                <span class="track"><i style="width:38.7%"></i></span>
+                <span class="vl">94</span>
+              </li>
+              <li>
+                <span class="lb"><span class="zh">样条 × 张量积展开</span><span class="en">Spline × tensor expansion</span><em>6,819 × 31,616</em></span>
+                <span class="track"><i style="width:100.0%"></i></span>
+                <span class="vl">31,616</span>
+              </li>
+              <li>
+                <span class="lb"><span class="zh">GCor-SIS-REDS 筛选</span><span class="en">Screened by GCor-SIS-REDS</span><em>稳健边际相关</em></span>
+                <span class="track"><i style="width:81.0%"></i></span>
+                <span class="vl">5,218</span>
+              </li>
+              <li class="is-final">
+                <span class="lb"><span class="zh">SCAD 非零特征</span><span class="en">SCAD non-zero features</span><em>15 个交互项</em></span>
+                <span class="track"><i style="width:20.0%"></i></span>
+                <span class="vl">16</span>
+              </li>
+            </ul>
+            <p class="fig-note">
+              <span class="zh">条形长度按对数刻度绘制（最窄处保留 20% 画布宽度），四级之间极差 1,976 倍；同样 91 个特征的 LightGBM 基线 AUC 为 0.9404，与白盒模型相差 <b>0.0024</b>，换来的是逐条可追溯的特征重要性。</span>
+              <span class="en">Bar lengths are drawn on a log scale with a 20% canvas floor, so the smallest stage stays visible; the four stages span 1,976×. A 91-feature LightGBM baseline reaches AUC 0.9404, a gap of <b>0.0024</b> from the white-box model — bought with fully traceable feature importance.</span>
+            </p>
+          </figure>
+
+          <div class="entry-foot">
+            <div class="tags"><span>R</span><span>Rcpp</span><span>Parallel</span><span>SCAD</span><span>Spline tensor</span><span>Survival</span></div>
+            <a class="link-out" href="https://github.com/Yei1y/Company-Bankruptcy-Prediction" target="_blank" rel="noopener">
+              GitHub
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="entry reveal" data-accent="pink">
+        <div class="entry-rank">
+          <span class="n">02</span>
+          <span class="k"><span class="zh">市场调查</span><span class="en">Survey</span></span>
+        </div>
+        <div>
+          <h3><span class="zh">广深两地家用智能健康设备市场调查</span><span class="en">Market survey: home smart-health devices in Guangzhou &amp; Shenzhen</span></h3>
+          <p class="sub"><span class="zh">企业委托 · 一手数据 · 抽样设计 → 人群细分 → 分市场策略</span><span class="en">Client-commissioned · first-hand data · sampling → segmentation → market-specific strategy</span></p>
+
+          <p class="meta">
+            <em><span class="zh">全国大学生市场调查与分析大赛</span><span class="en">National Market Research Competition</span></em>
+            <span class="sep">·</span>
+            <span class="zh"><b>核心成员</b>，负责数据模块（指标构建、问卷设计与发放、数据分析、可视化）并参与报告撰写与路演</span>
+            <span class="en"><b>Core member</b> leading the data module (indicator design, questionnaire design and fielding, analysis, visualisation) plus report writing and the pitch</span>
+            <span class="sep">·</span>
+            <span class="zh">广东赛区省级一等奖；省级大创结项</span>
+            <span class="en">1st Prize, Guangdong; provincial innovation project completed</span>
           </p>
+
+          <p class="desc">
+            <span class="zh">受广东省百强民营大健康企业委托的商业调研：从不等概率抽样设计、双问卷发放，到加权 K-Means 人群细分与 SEM 决策路径，最后落到分市场策略建议，构成一条完整的<strong>业务问题 → 数据 → 结论 → 建议</strong>链路。全部数据为自采，不是二手数据集的二次分析。</span>
+            <span class="en">A commercial study commissioned by a top-100 private health enterprise in Guangdong: unequal-probability sampling and two questionnaire waves, weighted K-Means segmentation with an SEM decision path, ending in market-specific recommendations — a complete <strong>business question → data → conclusion → action</strong> chain built entirely on data we collected ourselves.</span>
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <b>747 + 444</b>
+              <span><span class="zh">份有效问卷（广深 2 城 21 街道）</span><span class="en">Valid questionnaires (21 subdistricts, 2 cities)</span></span>
+            </div>
+            <div class="stat">
+              <b>841 + 476</b>
+              <span><span class="zh">分钟访谈记录</span><span class="en">Minutes of interviews</span></span>
+            </div>
+            <div class="stat">
+              <b>α = 0.983</b>
+              <span><span class="zh">量表信度，KMO = 0.977</span><span class="en">Scale reliability, KMO = 0.977</span></span>
+            </div>
+          </div>
+
+          <figure class="fig">
+            <figcaption>
+              <b><span class="zh">图 2</span><span class="en">Fig. 2</span></b>
+              <span class="zh">加权 K-Means 得到的三类人群结构，以及 SEM 对决策路径的解释力</span>
+              <span class="en">The three-segment structure from weighted K-Means, and how much of the decision path the SEM explains</span>
+            </figcaption>
+            <ul class="bars" role="list">
+              <li>
+                <span class="lb"><span class="zh">人群一</span><span class="en">Segment 1</span><em>13.19%</em></span>
+                <span class="track"><i style="width:13.19%"></i></span>
+                <span class="vl">13.19%</span>
+              </li>
+              <li>
+                <span class="lb"><span class="zh">人群二</span><span class="en">Segment 2</span><em>56.35%</em></span>
+                <span class="track"><i style="width:56.35%"></i></span>
+                <span class="vl">56.35%</span>
+              </li>
+              <li>
+                <span class="lb"><span class="zh">人群三</span><span class="en">Segment 3</span><em>30.46%</em></span>
+                <span class="track"><i style="width:30.46%"></i></span>
+                <span class="vl">30.46%</span>
+              </li>
+              <li class="is-final">
+                <span class="lb"><span class="zh">SEM 解释方差</span><span class="en">Variance explained by SEM</span><em>CMIN/DF 1.407</em></span>
+                <span class="track"><i style="width:68.7%"></i></span>
+                <span class="vl">68.7%</span>
+              </li>
+            </ul>
+            <p class="fig-note">
+              <span class="zh">人群划分以购入价格为核心指标、共 9 个聚类变量加权而成；SEM 的 RMSEA = 0.030。企业委托项目，底稿涉密，此处仅展示可公开的汇总口径。</span>
+              <span class="en">Segments come from a weighted K-Means over nine variables centred on purchase price; the SEM reports RMSEA = 0.030. Client work with confidential source materials — only publishable aggregates are shown.</span>
+            </p>
+          </figure>
+
+          <div class="entry-foot">
+            <div class="tags"><span>R</span><span>Python</span><span>SPSS / AMOS</span><span>PPS sampling</span><span>SEM</span><span>Weighted K-Means</span></div>
+            <span class="link-off"><span class="zh">企业委托项目，底稿涉密，暂不公开</span><span class="en">Client work — source materials confidential</span></span>
+          </div>
         </div>
-        <div class="about-info fade-in">
-          <div class="info-card">
-            <span class="info-card-icon">🎓</span>
-            <h4>Education</h4>
-            <p>B.S. Economic Statistics<br>M.S. Applied Statistics (incoming)</p>
+      </article>
+
+      <!-- 03 -->
+      <article class="entry reveal" data-accent="mint">
+        <div class="entry-rank">
+          <span class="n">03</span>
+          <span class="k"><span class="zh">论文</span><span class="en">Paper</span></span>
+          <span class="flag"><span class="zh">方法学底盘</span><span class="en">Methods core</span></span>
+        </div>
+        <div>
+          <h3><span class="zh">GCor-SIS：超高维生存数据的稳健特征筛选</span><span class="en">GCor-SIS: robust feature screening for ultrahigh-dimensional survival data</span></h3>
+          <p class="sub"><span class="zh">无模型筛选 · FDR 控制 · 重尾稳健性 · 生存分析</span><span class="en">Model-free screening · FDR control · heavy-tail robustness · survival analysis</span></p>
+
+          <p class="meta">
+            <em><span class="zh">科研 / 论文</span><span class="en">Research paper</span></em>
+            <span class="sep">·</span>
+            <span class="zh"><b>第二作者</b>（第一作者：导师姜云卢教授）· 投稿 <i>Communications in Statistics – Simulation and Computation</i>，审稿返修中</span>
+            <span class="en"><b>Second author</b> (first author: Prof. Yunlu Jiang) · submitted to <i>Communications in Statistics – Simulation and Computation</i>, under revision</span>
+            <span class="sep">·</span>
+            <span class="zh">2026-05 于中国人民大学第二届全国高校本科生统计论坛作报告</span>
+            <span class="en">Presented at the 2nd National Undergraduate Statistics Forum, Renmin University of China (2026-05)</span>
+          </p>
+
+          <p class="desc">
+            <span class="zh">基于 Pearson 相关的筛选方法在重尾分布下矩假设失效。这项工作参与提出基于格罗滕迪克相关的<strong>无模型（model-free）</strong>筛选方法 GCor-SIS，引入数据拆分反射实现 FDR 控制，并首次把框架推广到生存数据。我负责部分关键引理的证明、R 从零实现算法、重尾场景的蒙特卡洛模拟，以及论文主笔撰写。</span>
+            <span class="en">Pearson-correlation screeners fail under heavy tails because their moment assumptions break down. This work proposes <strong>GCor-SIS</strong>, a model-free screener based on Grothendieck's correlation, adds a data-splitting reflection for FDR control, and extends the framework to survival data for the first time. I proved part of the key lemmas, implemented the algorithm in R from scratch, ran the heavy-tailed Monte Carlo study, and wrote the manuscript.</span>
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <b>FDR ≤ α + o(1)</b>
+              <span><span class="zh">数据拆分反射控制</span><span class="en">Via data-splitting reflection</span></span>
+            </div>
+            <div class="stat">
+              <b>30% / 50%</b>
+              <span><span class="zh">截尾率场景 · Cauchy 与 t(3)</span><span class="en">Censoring scenarios · Cauchy and t(3)</span></span>
+            </div>
+            <div class="stat">
+              <b>0.7603</b>
+              <span><span class="zh">NKI295 乳腺癌数据 C-index</span><span class="en">C-index on the NKI295 breast-cancer data</span></span>
+            </div>
           </div>
-          <div class="info-card">
-            <span class="info-card-icon">🔬</span>
-            <h4>Interests</h4>
-            <p>Causal Inference · Bayesian Stats · NLP · ML</p>
+
+          <figure class="fig">
+            <figcaption>
+              <b><span class="zh">图 3</span><span class="en">Fig. 3</span></b>
+              <span class="zh">影响函数严格有界，因此强筛选一致性的证明无需次指数尾部条件</span>
+              <span class="en">A strictly bounded influence function lets strong screening consistency be proved without sub-exponential tail conditions</span>
+            </figcaption>
+            <div class="fmls">
+              <span class="fml">|ψ(x)| ≤ M &lt; ∞ &nbsp;<em><span class="zh">对任意尾部</span><span class="en">for any tail</span></em></span>
+              <span class="fml">P(S ⊇ S<sub>0</sub>) → 1 &nbsp;<em><span class="zh">强筛选一致性</span><span class="en">strong screening consistency</span></em></span>
+              <span class="fml">FDR ≤ α + o(1) &nbsp;<em><span class="zh">α = 0.05</span><span class="en">α = 0.05</span></em></span>
+            </div>
+            <p class="fig-note">
+              <span class="zh">模拟与实证基准：DC-SIS、BCor-SIS、PC-SIS；识别出的标志物包含 QSOX2、NUSAP1 等临床已验证的预后基因。论文审稿中，代码暂不公开。</span>
+              <span class="en">Benchmarks: DC-SIS, BCor-SIS, PC-SIS. Recovered markers include clinically validated prognostic genes such as QSOX2 and NUSAP1. Code withheld while the paper is under review.</span>
+            </p>
+          </figure>
+
+          <div class="entry-foot">
+            <div class="tags"><span>R</span><span>High-dim statistics</span><span>Survival analysis</span><span>U-statistics</span><span>Monte Carlo</span><span>LaTeX</span></div>
+            <span class="link-off"><span class="zh">代码暂不公开（论文审稿中）</span><span class="en">Code withheld pending review</span></span>
           </div>
-          <div class="info-card">
-            <span class="info-card-icon">🛠️</span>
-            <h4>Tools</h4>
-            <p>Python · R · Stata · LaTeX</p>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="entry reveal" data-accent="sky">
+        <div class="entry-rank">
+          <span class="n">04</span>
+          <span class="k"><span class="zh">回归实证</span><span class="en">Regression</span></span>
+        </div>
+        <div>
+          <h3><span class="zh">北京住房价格：特征价格模型与多元回归实证</span><span class="en">Beijing housing prices: a hedonic model with regression diagnostics</span></h3>
+          <p class="sub"><span class="zh">半对数设定 · 双向固定效应 · 六模型对照 · 完整诊断</span><span class="en">Semi-log form · two-way fixed effects · six-model comparison · full diagnostics</span></p>
+
+          <p class="meta">
+            <em><span class="zh">课程论文</span><span class="en">Course paper</span></em>
+            <span class="sep">·</span>
+            <span class="zh"><b>独立完成</b> · 现代回归分析</span>
+            <span class="en"><b>Sole author</b> · Modern Regression Analysis</span>
+          </p>
+
+          <p class="desc">
+            <span class="zh">用带时间—区域双向固定效应的半对数特征价格模型，估计各项住房特征的隐含价格。核心不在于把 R² 推高，而在于量化两个会被朴素统计<strong>系统性误读</strong>的效应：近地铁溢价被朴素对比高估约 4.8 倍，而挂牌天数缺失本身也携带信息。</span>
+            <span class="en">A semi-log hedonic model with two-way (time × district) fixed effects estimates the implicit price of each housing attribute. The point is not a higher R² but quantifying two effects that naive statistics <strong>systematically misread</strong>: the subway-proximity premium is overstated roughly 4.8× by a naive comparison, and missing listing-days carries information in itself.</span>
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <b>318,160</b>
+              <span><span class="zh">条链家成交记录 · 64 个特征</span><span class="en">Lianjia transactions · 64 features</span></span>
+            </div>
+            <div class="stat">
+              <b>R² = 0.8185</b>
+              <span><span class="zh">六模型对照中的选定模型</span><span class="en">Chosen among six specifications</span></span>
+            </div>
+            <div class="stat">
+              <b>p = 7.9 × 10⁻¹⁶⁵</b>
+              <span><span class="zh">缺失挂牌天数的系数显著性</span><span class="en">Significance of the missing-days coefficient</span></span>
+            </div>
           </div>
-          <div class="info-card">
-            <span class="info-card-icon">📍</span>
-            <h4>Location</h4>
-            <p>Beijing, China</p>
+
+          <figure class="fig">
+            <figcaption>
+              <b><span class="zh">图 4</span><span class="en">Fig. 4</span></b>
+              <span class="zh">近地铁溢价：朴素组间对比 vs 控制特征后的模型估计</span>
+              <span class="en">Subway premium: naive group contrast vs model estimate after controlling for attributes</span>
+            </figcaption>
+            <ul class="bars" role="list">
+              <li data-accent="peach">
+                <span class="lb"><span class="zh">朴素对比</span><span class="en">Naive contrast</span><em><span class="zh">未控制任何特征</span><span class="en">no controls</span></em></span>
+                <span class="track"><i style="width:98.6%"></i></span>
+                <span class="vl">27.6%</span>
+              </li>
+              <li class="is-final" data-accent="mint">
+                <span class="lb"><span class="zh">特征价格模型</span><span class="en">Hedonic model</span><em>100 × (e<sup>β</sup> − 1)</em></span>
+                <span class="track"><i style="width:20.7%"></i></span>
+                <span class="vl">5.8%</span>
+              </li>
+            </ul>
+            <p class="fig-note">
+              <span class="zh">两条条形等刻度绘制：不加控制变量会把溢价放大到近 5 倍。系数按 100 × (e<sup>β</sup> − 1) 精确换算；六模型中最精确的多项式模型条件数达 1.11 × 10<sup>12</sup>，系数已失去经济含义，因此未被采用。</span>
+              <span class="en">Both bars share one scale: without controls the premium inflates almost fivefold. Coefficients are converted exactly as 100 × (e<sup>β</sup> − 1). The most accurate of the six models was a polynomial with a condition number of 1.11 × 10<sup>12</sup>, whose coefficients had lost economic meaning — so it was rejected.</span>
+            </p>
+          </figure>
+
+          <div class="entry-foot">
+            <div class="tags"><span>Python</span><span>statsmodels</span><span>LASSO</span><span>Fixed effects</span><span>VIF / BP tests</span></div>
+            <a class="link-out" href="https://github.com/Yei1y/beijing-housing-regression" target="_blank" rel="noopener">
+              GitHub
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+            </a>
           </div>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="entry reveal" data-accent="peach">
+        <div class="entry-rank">
+          <span class="n">05</span>
+          <span class="k"><span class="zh">因果推断</span><span class="en">Causal</span></span>
+        </div>
+        <div>
+          <h3><span class="zh">AI 采纳与生产率：双重机器学习因果推断</span><span class="en">AI adoption and productivity: a double/debiased machine learning study</span></h3>
+          <p class="sub"><span class="zh">Neyman 正交评分 · 交叉拟合 · 因果森林异质性 · 安慰剂检验</span><span class="en">Neyman-orthogonal score · cross-fitting · causal-forest heterogeneity · placebo tests</span></p>
+
+          <p class="meta">
+            <em><span class="zh">自主研究</span><span class="en">Independent research</span></em>
+            <span class="sep">·</span>
+            <span class="zh"><b>独立完成</b> · 工作论文（含完整 LaTeX 论文与可复现代码）</span>
+            <span class="en"><b>Sole author</b> · working paper with a full LaTeX manuscript and reproducible code</span>
+          </p>
+
+          <p class="desc">
+            <span class="zh">在 15 万家企业的微观数据上，用双重机器学习在控制 64 维企业特征后估计 AI 采纳对劳动生产率的平均因果效应，并完成共同支撑与安慰剂检验。核心结果是一次<strong>不显著的零效应</strong>：把它写成可辩护的结论，和写成一个显著结果同样需要证据。</span>
+            <span class="en">Using double/debiased machine learning on 150,000 firms, I estimated the causal effect of AI adoption on labour productivity after controlling for 64 firm characteristics, with overlap and placebo diagnostics. The headline result is an <strong>insignificant null</strong> — making “no effect” defensible takes the same evidence as making an effect significant.</span>
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <b>+0.6%</b>
+              <span><span class="zh">ATE，p = 0.342（不显著）</span><span class="en">ATE, p = 0.342 (not significant)</span></span>
+            </div>
+            <div class="stat">
+              <b>0.044</b>
+              <span><span class="zh">CATE 标准差，约为 ATE 的 8 倍</span><span class="en">CATE sd, roughly 8× the ATE</span></span>
+            </div>
+            <div class="stat">
+              <b>3</b>
+              <span><span class="zh">种 nuisance 估计结论一致</span><span class="en">Nuisance estimators agree</span></span>
+            </div>
+          </div>
+
+          <figure class="fig">
+            <figcaption>
+              <b><span class="zh">图 5</span><span class="en">Fig. 5</span></b>
+              <span class="zh">因果森林刻画的 CATE 分布：个体效应围绕零散开，均值几乎没有解释力</span>
+              <span class="en">The CATE distribution from the causal forest: individual effects spread around zero, so the mean explains little</span>
+            </figcaption>
+            <div class="box" role="img" aria-label="CATE distribution: 10th percentile -0.0488, mean 0.0056, 90th percentile 0.0595">
+              <span class="spread" style="left:8.4%;width:83.2%"></span>
+              <span class="m" style="left:50%"><i></i><em>ATE +0.0056</em></span>
+              <span class="z" style="left:56.3%"><i></i><em>0</em></span>
+              <span class="w" style="left:8.4%"><i></i><em>P10 −0.0488</em></span>
+              <span class="w" style="left:91.6%"><i></i><em>P90 0.0595</em></span>
+            </div>
+            <p class="fig-note">
+              <span class="zh">横轴为 CATE 取值，多数企业落在 ±0.01 之间：46.1% 的企业 CATE &gt; 0.01，34.6% 低于 −0.01。三种 nuisance 估计（LASSO / 随机森林 / XGBoost）给出的 ATE 落在 [0.0004, 0.0059]。</span>
+              <span class="en">The axis is the CATE, and most firms sit within ±0.01: 46.1% have CATE &gt; 0.01 and 34.6% fall below −0.01. Across three nuisance estimators (LASSO / random forest / XGBoost) the ATE stays within [0.0004, 0.0059].</span>
+            </p>
+          </figure>
+
+          <div class="entry-foot">
+            <div class="tags"><span>Python</span><span>EconML</span><span>Causal forest</span><span>Cross-fitting</span><span>Placebo test</span></div>
+            <a class="link-out" href="https://github.com/Yei1y/ai-adoption-productivity-dml" target="_blank" rel="noopener">
+              GitHub
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="entry reveal" data-accent="lemon">
+        <div class="entry-rank">
+          <span class="n">06</span>
+          <span class="k"><span class="zh">数据分析</span><span class="en">Analytics</span></span>
+          <span class="flag"><span class="zh">数分对口</span><span class="en">Analyst track</span></span>
+        </div>
+        <div>
+          <h3><span class="zh">电商用户行为漏斗分析与转化建模</span><span class="en">E-commerce funnel analysis and conversion modelling</span></h3>
+          <p class="sub"><span class="zh">SQL 取数 · 指标口径 · 漏斗归因 · 效应量 · 转化建模</span><span class="en">SQL querying · metric definitions · funnel attribution · effect size · conversion modelling</span></p>
+
+          <p class="meta">
+            <em><span class="zh">用户行为 / SQL</span><span class="en">User behaviour / SQL</span></em>
+            <span class="sep">·</span>
+            <span class="zh"><b>独立完成</b> · 公开项目的批判式复现与深挖 · 与数据分析岗日常工作最贴近</span>
+            <span class="en"><b>Sole author</b> · critical reproduction and extension of a public project · closest to an analyst's day-to-day work</span>
+          </p>
+
+          <p class="desc">
+            <span class="zh">在 10 万条电商会话上做全链路漏斗：MySQL 建库取数、定位最大流失环节、用统计检验而不是描述性对比判断人群差异，并指出那个最亮眼的指标存在<strong>循环论证</strong>、不能当作运营抓手。漏斗容易在口径与因果上误导人，这个项目把真正可用的那一部分挑了出来。</span>
+            <span class="en">A full-funnel analysis over 100,000 sessions: MySQL ingestion and querying, locating the largest drop-off, and testing group differences statistically rather than descriptively — then flagging that the most striking indicator is <strong>circular by construction</strong> and cannot be used as a lever. Funnels mislead on definitions and causation; this project separates out the part that holds.</span>
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <b>97,274</b>
+              <span><span class="zh">会话（清洗后，剔除 2.73%）</span><span class="en">Sessions after cleaning (2.73% removed)</span></span>
+            </div>
+            <div class="stat">
+              <b>12.63%</b>
+              <span><span class="zh">最大流失环节转化率，流失 41,870 次</span><span class="en">Conversion at the worst step, 41,870 lost</span></span>
+            </div>
+            <div class="stat">
+              <b>V = 0.2657</b>
+              <span><span class="zh">活跃度的 Cramér's V（其余维度 &lt; 0.06）</span><span class="en">Cramér's V for engagement (others &lt; 0.06)</span></span>
+            </div>
+          </div>
+
+          <figure class="fig">
+            <figcaption>
+              <b><span class="zh">图 6</span><span class="en">Fig. 6</span></b>
+              <span class="zh">五段式漏斗：条形长度按会话人数等比，标注为相邻两段的转化率</span>
+              <span class="en">The five-step funnel: bar lengths are proportional to sessions, labels give step-over-step conversion</span>
+            </figcaption>
+            <ul class="funnel" role="list">
+              <li>
+                <span class="fs"><span class="zh">首页</span><span class="en">Home</span></span>
+                <span class="fw"><i style="width:100%"></i></span>
+                <span class="fv">97,274</span>
+                <span class="fr">—</span>
+              </li>
+              <li>
+                <span class="fs"><span class="zh">列表页</span><span class="en">Listing</span></span>
+                <span class="fw"><i style="width:73.69%"></i></span>
+                <span class="fv">71,684</span>
+                <span class="fr">73.69%</span>
+              </li>
+              <li>
+                <span class="fs"><span class="zh">详情页</span><span class="en">Detail</span></span>
+                <span class="fw"><i style="width:49.27%"></i></span>
+                <span class="fv">47,922</span>
+                <span class="fr">66.85%</span>
+              </li>
+              <li class="hot">
+                <span class="fs"><span class="zh">支付页</span><span class="en">Payment</span></span>
+                <span class="fw"><i style="width:6.22%"></i></span>
+                <span class="fv">6,052</span>
+                <span class="fr">12.63%</span>
+              </li>
+              <li>
+                <span class="fs"><span class="zh">确认页</span><span class="en">Confirm</span></span>
+                <span class="fw"><i style="width:1.73%"></i></span>
+                <span class="fv">1,684</span>
+                <span class="fr">27.83%</span>
+              </li>
+            </ul>
+            <p class="fig-note">
+              <span class="zh">前两段转化率都在 67%–74%，到「详情页 → 支付页」骤降到 <b>12.63%</b>，流失量约为第二大流失点的 10 倍——这是 24 条 SQL 查询里唯一值得优先动的环节。转化口径为「到达确认页」，不等于支付成功；卡方检验经 BH 校正后 8 个维度均显著，但只有活跃度具备实质关联。</span>
+              <span class="en">The first two steps convert at 67%–74%, then detail → payment collapses to <b>12.63%</b>, losing roughly ten times the next-worst step — the one place among the 24 SQL queries worth fixing first. Conversion here means reaching the confirmation page, not a completed payment; after BH correction all eight dimensions were significant, but only engagement carried real association.</span>
+            </p>
+          </figure>
+
+          <div class="entry-foot">
+            <div class="tags"><span>MySQL</span><span>Window SQL</span><span>Python</span><span>statsmodels</span><span>Funnel &amp; attribution</span></div>
+            <a class="link-out" href="https://github.com/Yei1y/user-behavior-funnel-analysis" target="_blank" rel="noopener">
+              GitHub
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="note reveal">
+      <span class="zh">另有 2 个项目（中文新闻分类 LSTM vs 朴素贝叶斯、影评情感分析四模型对比），价值在于实验对照与数据质量核查——两者都识别出了原本看起来成立的结论里的隐患。完整列表见 <a href="projects/"><strong>项目全集</strong></a>。</span>
+      <span class="en">Two further projects (Chinese news classification: LSTM vs naive Bayes; a four-model sentiment comparison) evidence experimental control and data-quality checking — both surfaced problems in conclusions that looked settled. See the <a href="projects/"><strong>all-projects page</strong></a> for the full list.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ======================= Skills ======================= -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>03</b><span class="zh">技能</span><span class="en">Skills</span></p>
+      <h2><span class="zh">每一项技能都能指到具体的项目与代码</span><span class="en">Every skill points to a specific project and its code</span></h2>
+      <p>
+        <span class="zh">工具按在项目里的实际使用深度列出，还没有实操过的部分没有写进来。</span>
+        <span class="en">Tools are listed at the depth they were actually used, and anything not yet applied in practice is left out.</span>
+      </p>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-col reveal" data-accent="mint">
+        <h3><span class="n">A</span><span class="zh">语言与工具</span><span class="en">Languages &amp; tools</span></h3>
+        <div class="chips">
+          <span class="is-em">Python</span><span class="is-em">R</span><span>Rcpp</span><span>SQL / MySQL 8.0</span><span>LaTeX</span><span>SPSS</span><span>AMOS</span><span>Git / GitHub</span>
+        </div>
+      </div>
+
+      <div class="skill-col reveal" data-accent="sky">
+        <h3><span class="n">B</span><span class="zh">统计方法</span><span class="en">Statistical methods</span></h3>
+        <div class="chips">
+          <span><span class="zh">特征筛选 SIS</span><span class="en">Screening (SIS)</span></span>
+          <span><span class="zh">惩罚回归 SCAD / LASSO</span><span class="en">SCAD / LASSO</span></span>
+          <span><span class="zh">生存分析</span><span class="en">Survival analysis</span></span>
+          <span><span class="zh">因果推断 DML</span><span class="en">Causal inference (DML)</span></span>
+          <span><span class="zh">因果森林 / CATE</span><span class="en">Causal forests / CATE</span></span>
+          <span><span class="zh">抽样设计</span><span class="en">Sampling design</span></span>
+          <span><span class="zh">列联表与效应量</span><span class="en">Contingency &amp; effect size</span></span>
+          <span><span class="zh">多重比较校正 BH</span><span class="en">Multiple testing (BH)</span></span>
+          <span><span class="zh">聚类分析</span><span class="en">Clustering</span></span>
+          <span>SEM</span>
+        </div>
+      </div>
+
+      <div class="skill-col reveal" data-accent="lav">
+        <h3><span class="n">C</span><span class="zh">数据与工程</span><span class="en">Data &amp; engineering</span></h3>
+        <div class="chips">
+          <span>pandas / NumPy</span><span>scikit-learn</span><span>statsmodels</span><span>PyTorch</span><span>EconML</span>
+          <span><span class="zh">窗口函数取数</span><span class="en">Window-function SQL</span></span>
+          <span><span class="zh">显式 DDL 建库</span><span class="en">Explicit DDL schemas</span></span>
+          <span><span class="zh">并行与内存控制</span><span class="en">Parallelism &amp; memory control</span></span>
+          <span><span class="zh">可复现脚本规范</span><span class="en">Reproducible pipelines</span></span>
+        </div>
+      </div>
+
+      <div class="skill-col reveal" data-accent="peach">
+        <h3><span class="n">D</span><span class="zh">可视化与写作</span><span class="en">Visualisation &amp; writing</span></h3>
+        <div class="chips">
+          <span>matplotlib</span><span>seaborn</span><span>ggplot2</span>
+          <span><span class="zh">雷达图 / 云雨图 / 气泡图</span><span class="en">Radar / raincloud / bubble</span></span>
+          <span><span class="zh">论文排版与三线表</span><span class="en">LaTeX typesetting</span></span>
+          <span><span class="zh">中英双语报告</span><span class="en">Bilingual reporting</span></span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ============ Skills ============ -->
-  <section id="skills" class="section section-alt">
-    <div class="container">
-      <div class="section-header fade-in">
-        <p class="section-label">Skills</p>
-        <h2 class="section-title">Tech Stack &amp; Tools</h2>
-        <p class="section-subtitle">What I use daily to explore, model, and visualize data.</p>
+    <p class="table-note reveal">
+      <b><span class="zh">还在补的部分</span><span class="en">Still being built</span></b> ·
+      <span class="zh">Docker / 服务部署、API 调用与 RAG / Agent 工作流、A/B 实验设计、SQL 留存与漏斗自连接取数——这些尚未写进技能列表。</span>
+      <span class="en">Docker / deployment, API calls and RAG / agent workflows, A/B experiment design, and retention / self-join funnel SQL — none of these appear in the list above yet.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ======================= Honors ======================= -->
+<section class="section section--band" id="honors">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="head-label"><b>04</b><span class="zh">荣誉</span><span class="en">Honors</span></p>
+      <h2><span class="zh">奖学金、竞赛与技能证书</span><span class="en">Scholarships, competitions and certificates</span></h2>
+    </div>
+
+    <div class="honor-grid">
+      <div class="honor reveal" data-accent="mint">
+        <h3><span class="dot"></span><span class="zh">奖学金与荣誉</span><span class="en">Scholarships &amp; honours</span></h3>
+        <ul>
+          <li><span class="yr">2025</span><span><span class="zh"><b>国家奖学金</b></span><span class="en"><b>National Scholarship</b></span></span></li>
+          <li><span class="yr">2024</span><span><span class="zh">暨南大学校级<b>一等奖学金</b></span><span class="en">Jinan University <b>First-class Scholarship</b></span></span></li>
+          <li><span class="yr">2024 · 2025</span><span><span class="zh">暨南大学优秀共青团员</span><span class="en">Outstanding Communist Youth League Member</span></span></li>
+          <li><span class="yr">—</span><span><span class="zh">暨南大学经济-统计学拔尖人才计划（优营）</span><span class="en">Jinan University Economics–Statistics Talents Programme</span></span></li>
+          <li><span class="yr">—</span><span><span class="zh">校级第四期「青年马克思主义者培养工程」（优营）</span><span class="en">4th Young Marxist Training Programme (honours)</span></span></li>
+        </ul>
       </div>
-      <div class="skills-grid">
 
-        <div class="skill-category fade-in">
-          <h3><span class="dot" style="background: var(--primary);"></span> Languages</h3>
-          <div class="skill-tags">
-            <span class="skill-tag blue">Python</span>
-            <span class="skill-tag green">R</span>
-            <span class="skill-tag orange">SQL</span>
-            <span class="skill-tag purple">LaTeX</span>
-          </div>
-        </div>
+      <div class="honor reveal" data-accent="pink">
+        <h3><span class="dot"></span><span class="zh">统计与市场调查</span><span class="en">Statistics &amp; market research</span></h3>
+        <ul>
+          <li><span class="yr">2025-04</span><span><span class="zh">第十五届全国大学生市场调查与分析大赛广东赛区本科组<b>省级一等奖</b></span><span class="en">15th National Market Research Competition — <b>1st Prize, Guangdong</b></span></span></li>
+          <li><span class="yr">2025-07</span><span><span class="zh">广东省大学生市场调查与分析大赛<b>省级三等奖</b></span><span class="en">Guangdong Market Research Competition — <b>3rd Prize</b></span></span></li>
+          <li><span class="yr">2026-06</span><span><span class="zh">全国大学生统计建模大赛<b>广东省三等奖</b></span><span class="en">National Statistical Modeling Competition — <b>3rd Prize, Guangdong</b></span></span></li>
+        </ul>
+      </div>
 
-        <div class="skill-category fade-in">
-          <h3><span class="dot" style="background: var(--secondary);"></span> Data Science &amp; ML</h3>
-          <div class="skill-tags">
-            <span class="skill-tag blue">NumPy</span>
-            <span class="skill-tag green">Pandas</span>
-            <span class="skill-tag orange">scikit-learn</span>
-            <span class="skill-tag blue">PyTorch</span>
-            <span class="skill-tag purple">Statsmodels</span>
-            <span class="skill-tag green">SciPy</span>
-          </div>
-        </div>
+      <div class="honor reveal" data-accent="sky">
+        <h3><span class="dot"></span><span class="zh">数学竞赛与建模</span><span class="en">Mathematics &amp; modelling</span></h3>
+        <ul>
+          <li><span class="yr">2024-12</span><span><span class="zh">第十六届全国大学生数学竞赛（非数学 B 类）<b>广东省一等奖</b></span><span class="en">16th National College Mathematics Competition — <b>1st Prize, Guangdong</b></span></span></li>
+          <li><span class="yr">2024-08</span><span><span class="zh">第五届「华数杯」全国大学生数学建模竞赛<b>二等奖</b></span><span class="en">5th Huashu Cup — <b>2nd Prize</b></span></span></li>
+          <li><span class="yr">2024-12</span><span><span class="zh">全国大学生数学建模竞赛<b>广东省二等奖</b>（C 题）</span><span class="en">CUMCM — <b>2nd Prize, Guangdong</b> (Problem C)</span></span></li>
+          <li><span class="yr">2024-12</span><span><span class="zh">亚太地区大学生数学建模竞赛（APMCM）<b>二等奖</b></span><span class="en">APMCM — <b>2nd Prize</b></span></span></li>
+          <li><span class="yr">2025-06</span><span><span class="zh">第十五届 MathorCup 数学应用挑战赛<b>国家级三等奖</b></span><span class="en">15th MathorCup — <b>National 3rd Prize</b></span></span></li>
+          <li><span class="yr">2025-08</span><span><span class="zh">第六届「华数杯」全国大学生数学建模竞赛<b>二等奖</b></span><span class="en">6th Huashu Cup — <b>2nd Prize</b></span></span></li>
+          <li><span class="yr">2025-12</span><span><span class="zh">全国大学生数学建模竞赛广东省<b>三等奖</b>（C 题：NIPT 时点选择）</span><span class="en">CUMCM — 3rd Prize, Guangdong (Problem C: NIPT timing)</span></span></li>
+        </ul>
+      </div>
 
-        <div class="skill-category fade-in">
-          <h3><span class="dot" style="background: var(--accent);"></span> Visualization</h3>
-          <div class="skill-tags">
-            <span class="skill-tag blue">Matplotlib</span>
-            <span class="skill-tag green">Seaborn</span>
-            <span class="skill-tag orange">ggplot2</span>
-            <span class="skill-tag purple">Plotly</span>
-          </div>
-        </div>
-
-        <div class="skill-category fade-in">
-          <h3><span class="dot" style="background: var(--muted-purple);"></span> Tools &amp; Environment</h3>
-          <div class="skill-tags">
-            <span class="skill-tag blue">Git</span>
-            <span class="skill-tag green">VS Code</span>
-            <span class="skill-tag orange">Jupyter</span>
-            <span class="skill-tag purple">Anaconda</span>
-            <span class="skill-tag blue">RStudio</span>
-            <span class="skill-tag green">Docker</span>
-          </div>
-        </div>
-
+      <div class="honor reveal" data-accent="lav">
+        <h3><span class="dot"></span><span class="zh">技能证书与语言</span><span class="en">Certificates &amp; languages</span></h3>
+        <ul>
+          <li><span class="yr">—</span><span><span class="zh">全国计算机等级考试二级（MySQL），成绩<b>良好</b></span><span class="en">National Computer Rank Examination Level 2 (MySQL) — <b>Merit</b></span></span></li>
+          <li><span class="yr">CET-6</span><span><span class="zh">大学英语六级 <b>551</b> 分</span><span class="en">College English Test Band 6 — <b>551</b></span></span></li>
+          <li><span class="yr">CET-4</span><span><span class="zh">大学英语四级 <b>587</b> 分</span><span class="en">College English Test Band 4 — <b>587</b></span></span></li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ Featured Projects ============ -->
-  <section id="projects" class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <p class="section-label">Projects</p>
-        <h2 class="section-title">Featured Work</h2>
-        <p class="section-subtitle">Selected projects in regression, causal inference, and NLP.</p>
-      </div>
-      <div class="projects-grid">
-
-        <div class="project-card fade-in">
-          <span class="project-card-tag">Regression</span>
-          <h3>Beijing Housing Price Analysis</h3>
-          <p>Comprehensive regression analysis of Lianjia Beijing second-hand housing data, covering data preprocessing, variable selection, model diagnostics, and multi-model comparison.</p>
-          <div class="project-card-langs">
-            <span>Python</span>
-            <span>Jupyter</span>
-          </div>
-          <a href="https://github.com/Yei1y/beijing-housing-regression" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
-
-        <div class="project-card fade-in">
-          <span class="project-card-tag">Causal Inference</span>
-          <h3>AI Adoption &amp; Productivity</h3>
-          <p>Applied Double/Debiased Machine Learning (DML) to estimate the causal effect of AI adoption on firm productivity, using panel data and modern causal inference methods.</p>
-          <div class="project-card-langs">
-            <span>Python</span>
-            <span>R</span>
-          </div>
-          <a href="https://github.com/Yei1y/ai-adoption-productivity-dml" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
-
-        <div class="project-card fade-in">
-          <span class="project-card-tag">NLP</span>
-          <h3>THUCNews Text Classification</h3>
-          <p>Built text classification models on the THUCNews Chinese news dataset, comparing traditional machine learning approaches with neural network architectures.</p>
-          <div class="project-card-langs">
-            <span>Python</span>
-            <span>scikit-learn</span>
-          </div>
-          <a href="https://github.com/Yei1y/THUCNews-NLP" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
-
-        <div class="project-card fade-in">
-          <span class="project-card-tag">Statistical Modeling</span>
-          <h3>Company Bankruptcy Prediction</h3>
-          <p>High-dimensional interaction mining for corporate bankruptcy warning: an explicit 31,616-dim spline-tensor feature space, GCor-SIS-REDS screening with hand-written Rcpp kernels, and cost-sensitive SCAD penalized logistic regression.</p>
-          <div class="project-card-langs">
-            <span>R</span>
-            <span>Rcpp</span>
-          </div>
-          <a href="https://github.com/Yei1y/Company-Bankruptcy-Prediction" target="_blank" class="project-card-link">
-            View on GitHub &rarr;
-          </a>
-        </div>
-
-      </div>
+<!-- ======================= Contact ======================= -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="head head--center reveal">
+      <p class="head-label"><b>05</b><span class="zh">联系</span><span class="en">Contact</span></p>
+      <h2><span class="zh">欢迎聊聊数据</span><span class="en">Let’s talk data</span></h2>
+      <p>
+        <span class="zh">正在寻找数据科学 / 数据分析方向的实习机会，也欢迎 AI 产品与增长相关的岗位。广州优先，深圳可接受；邮件通常一天内回复。</span>
+        <span class="en">I am looking for a data science / analytics internship, and AI product and growth roles are welcome too. Guangzhou first, Shenzhen second; I usually reply to email within a day.</span>
+      </p>
     </div>
-  </section>
 
-  <!-- ============ Connect ============ -->
-  <section id="connect" class="section section-alt">
-    <div class="container">
-      <div class="section-header fade-in">
-        <p class="section-label">Connect</p>
-        <h2 class="section-title">Let's Talk Data</h2>
-        <p class="section-subtitle">Interested in collaborating or just want to chat about statistics?</p>
-      </div>
-      <div class="connect-grid">
-        <a href="https://github.com/Yei1y" target="_blank" class="connect-card fade-in">
-          <span class="connect-card-icon">🐙</span>
-          <span class="connect-card-label">GitHub</span>
-          <span class="connect-card-value">@Yei1y</span>
-        </a>
-        <a href="mailto:yei1y.stats@gmail.com" class="connect-card fade-in">
-          <span class="connect-card-icon">✉️</span>
-          <span class="connect-card-label">Email</span>
-          <span class="connect-card-value">yei1y.stats@gmail.com</span>
-        </a>
-        <!--
-        <a href="https://linkedin.com/in/Yei1y" target="_blank" class="connect-card fade-in">
-          <span class="connect-card-icon">💼</span>
-          <span class="connect-card-label">LinkedIn</span>
-          <span class="connect-card-value">/in/Yei1y</span>
-        </a>
-        -->
-      </div>
+    <div class="connect">
+      <a class="reveal" data-accent="mint" href="mailto:yeily_github@163.com">
+        <span class="ico">✉️</span>
+        <span class="lb">Email</span>
+        <span class="vl">yeily_github@163.com</span>
+      </a>
+      <a class="reveal" data-accent="sky" href="https://github.com/Yei1y" target="_blank" rel="noopener">
+        <span class="ico">🐙</span>
+        <span class="lb">GitHub</span>
+        <span class="vl">@Yei1y</span>
+      </a>
+      <a class="reveal" data-accent="lav" href="projects/">
+        <span class="ico">📁</span>
+        <span class="lb"><span class="zh">本站</span><span class="en">This site</span></span>
+        <span class="vl"><span class="zh">项目全集（8 个）</span><span class="en">All 8 projects</span></span>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ Footer ============ -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Yeily. Built with &hearts; in Beijing.</p>
-    </div>
-  </footer>
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <p>&copy; <span id="year">2026</span> <span class="zh">叶伟丰 · Weifeng Ye</span><span class="en">Weifeng Ye (叶伟丰)</span></p>
+    <p><span class="zh">手写 HTML · CSS · JavaScript，无框架、无追踪</span><span class="en">Hand-written HTML · CSS · JavaScript — no framework, no tracking</span></p>
+  </div>
+</footer>
 
-  <script src="assets/js/main.js"></script>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
